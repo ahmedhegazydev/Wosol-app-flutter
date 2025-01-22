@@ -42,15 +42,16 @@ class SplashScreenState extends State<SplashScreen>
     if (!firstLaunch) {
       await PrefManager.setFirstLaunch(true);
       if (mounted) {
-        Navigator.pushReplacementNamed(context, Constants.tutorial);
+        Navigator.pushReplacementNamed(context, Constants.TUTORIAL);
       }
-    } else if (isLoggedIn == Constants.valueIsLoggedIn && !isAppUpdateNeeded) {
+    } else if (isLoggedIn == Constants.VALUE_IS_LOGGED_IN && !isAppUpdateNeeded) {
       if (mounted) {
-        Navigator.pushReplacementNamed(context, Constants.home);
+        Navigator.pushReplacementNamed(context, Constants.HOME);
       }
     } else {
       if (mounted) {
-        Navigator.pushReplacementNamed(context, Constants.login);
+        // Navigator.pushReplacementNamed(context, Constants.login);
+        Navigator.pushReplacementNamed(context, Constants.tutorial);
       }
     }
 
@@ -110,5 +111,4 @@ class SplashScreenState extends State<SplashScreen>
       ),
     );
   }
-
 }
