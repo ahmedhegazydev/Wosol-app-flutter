@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_apps/screens/TutorialScreen.dart';
+import 'package:flutter_apps/utils/Constants.dart';
 import 'package:lottie/lottie.dart';
 
-import 'SplashScreen.dart';
+import 'screens/SplashScreen.dart';
 
 void main() async {
   runApp(MyApp());
@@ -17,9 +19,9 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => SplashScreen(),
-        // '/tutorial': (context) => TutorialScreen(),
-        // '/home': (context) => HomeScreen(),
-        // '/login': (context) => LoginScreen(),
+        Constants.tutorial: (context) => TutorialScreen(),
+        // Constants.home: (context) => HomeScreen(),
+        // Constants.login: (context) => LoginScreen(),
       },
 
     );
