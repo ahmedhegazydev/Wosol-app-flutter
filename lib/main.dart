@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Future.delayed(Duration(seconds: 3)); // Set splash duration
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
