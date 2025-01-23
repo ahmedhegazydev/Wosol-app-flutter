@@ -50,8 +50,8 @@ class SplashScreenState extends State<SplashScreen>
       }
     } else {
       if (mounted) {
-        // Navigator.pushReplacementNamed(context, Constants.login);
-        Navigator.pushReplacementNamed(context, Constants.tutorial);
+        // Navigator.pushReplacementNamed(context, Constants.LOGIN);
+        Navigator.pushReplacementNamed(context, Constants.TUTORIAL);
       }
     }
 

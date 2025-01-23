@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:shared_preferences/shared_preferences.dart';
 
 class PrefManager {
@@ -82,5 +84,14 @@ class PrefManager {
     return prefs.getString(keyUserNameDevOrPrd);
   }
 
+  static Future<String?> getSapToken() async {
+    final prefs = await _getPrefs();
+    return prefs.getString(PrefManager.keySAPtoken);
+  }
+
+  static Future<int?> getTokenExpiration() async {
+    final prefs = await _getPrefs();
+    return prefs.getInt(PrefManager.keyTokenExpiration);
+  }
 
 }

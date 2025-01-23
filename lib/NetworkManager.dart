@@ -2,7 +2,6 @@ import 'package:dio/dio.dart';
 import 'package:dio_smart_retry/dio_smart_retry.dart';
 import 'package:flutter_apps/utils/Constants.dart';
 import 'package:flutter_apps/utils/PrefManager.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class NetworkManager {
   late Dio _wosolApi;
@@ -106,8 +105,7 @@ class NetworkManager {
   }
 
   Future<bool> _isTokenExpired() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    final expirationTime = prefs.getInt('TokenExpiration');
+    final expirationTime = await PrefManager.getTokenExpiration();
     if (expirationTime == null) return true;
 
     final currentTime = DateTime.now().millisecondsSinceEpoch ~/ 1000;
@@ -115,38 +113,37 @@ class NetworkManager {
   }
 
   Future<Dio> _getSapApi() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    String? token = prefs.getString('SAPtoken');
+    String? token = await PrefManager.getSapToken();
 
     if (await _isTokenExpired()) {
       await _refreshToken();
-      token = prefs.getString('SAPtoken');
+      token = await PrefManager.getSapToken();
     }
 
     _sapApi.options.headers['Authorization'] = 'Bearer $token';
     return _sapApi;
   }
 
-  Future<dynamic> get(String endPoint,
-      {required Map<String, dynamic> params}) async {
-    try {
-      final response = await _wosolApi.get(endPoint, queryParameters: params);
-      return response.data;
-    } catch (e) {
-      print('GET request failed: $e');
-      throw e;
-    }
-  }
-
-  Future<dynamic> post(String endPoint, {dynamic data}) async {
-    try {
-      final response = await _wosolApi.post(endPoint, data: data);
-      return response.data;
-    } catch (e) {
-      print('POST request failed: $e');
-      throw e;
-    }
-  }
+  // Future<dynamic> get(String endPoint,
+  //     {required Map<String, dynamic> params}) async {
+  //   try {
+  //     final response = await _wosolApi.get(endPoint, queryParameters: params);
+  //     return response.data;
+  //   } catch (e) {
+  //     print('GET request failed: $e');
+  //     throw e;
+  //   }
+  // }
+  //
+  // Future<dynamic> post(String endPoint, {dynamic data}) async {
+  //   try {
+  //     final response = await _wosolApi.post(endPoint, data: data);
+  //     return response.data;
+  //   } catch (e) {
+  //     print('POST request failed: $e');
+  //     throw e;
+  //   }
+  // }
 
   // Get filtered list items
   Future<dynamic> getListsItemsFiltered(Map<String, dynamic> params) async {
@@ -265,5 +262,57 @@ class NetworkManager {
       print("Error in fetchSapToken: $error");
       throw error;
     }
+  }
+
+  // Fetch Text Resources
+  Future<Map<String, dynamic>> fetchTextResources(
+    Map<String, dynamic> params,
+  ) async {
+    try {
+      final defaultParams = {'listName': 'textResources'};
+      final combinedParams = {...defaultParams, ...params};
+      final response = await getListsItemsFiltered(combinedParams);
+
+      return {
+        'data': response,
+        'isLoading': false,
+        'error': null,
+        // 'screen': screen,
+      };
+    } catch (error) {
+      print("Error in fetchTextResources: $error");
+      return {
+        'data': null,
+        'isLoading': false,
+        'error': error.toString(),
+        // 'screen': screen,
+      };
+    }
+  }
+
+  // Fetch Intro Data
+  Future<Map<int, dynamic>> fetchIntroData(List<int> ids) async {
+    Map<int, dynamic> introData = {};
+    try {
+      for (int id in ids) {
+        final response = await getItemById({
+          'listName': 'Intro',
+          'id': id,
+          'lang': 'ar',
+          'SiteName': 'internalportal',
+        });
+        introData[id] = {'data': response, 'isLoading': false, 'error': null};
+      }
+    } catch (error) {
+      for (int id in ids) {
+        introData[id] = {
+          'data': null,
+          'isLoading': false,
+          'error': error.toString()
+        };
+      }
+      print("Error in fetchIntroData: $error");
+    }
+    return introData;
   }
 }
