@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_apps/screens/login/LoginScreen.dart';
 import 'package:flutter_apps/screens/tutorial/TutorialScreen.dart';
 import 'package:flutter_apps/utils/Constants.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -25,8 +26,8 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => SplashScreen(),
         Constants.TUTORIAL: (context) => TutorialScreen(),
-        // Constants.HOME: (context) => TutorialScreen(),
-        // Constants.LOGIN: (context) => TutorialScreen(),
+        Constants.HOME: (context) => TutorialScreen(),
+        Constants.LOGIN: (context) => LoginScreen(),
         // Constants.HOME: (context) => HomeScreen(),
         // Constants.LOGIN: (context) => LoginScreen(),
       },

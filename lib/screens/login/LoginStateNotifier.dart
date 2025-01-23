@@ -1,0 +1,86 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_apps/utils/ToastService.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:local_auth/local_auth.dart';
+
+import 'LoginState.dart';
+
+class LoginStateNotifier extends StateNotifier<LoginState> {
+  LoginStateNotifier() : super(LoginState());
+
+  final LocalAuthentication auth = LocalAuthentication();
+
+  Future<void> handleLogin(BuildContext context) async {
+    state = state.copyWith(isLoading: true, errorMessage: null);
+    final username = state.usernameController.text;
+    final password = state.passwordController.text;
+
+    if (username.isEmpty || password.isEmpty) {
+      state = state.copyWith(
+        isLoading: false,
+        errorMessage: "Username and password cannot be empty",
+      );
+      return;
+    }
+
+    // Simulate API call
+    await Future.delayed(const Duration(seconds: 2));
+
+    final isSuccess =
+        username == "user" && password == "password"; // Mock validation
+
+    if (isSuccess) {
+      // Fluttertoast.showToast(msg: "Login successful");
+      state = state.copyWith(isLoading: false);
+      Navigator.pushReplacementNamed(context, '/home');
+    } else {
+      state = state.copyWith(
+        isLoading: false,
+        errorMessage: "Invalid username or password",
+      );
+    }
+  }
+
+  Future<void> checkBiometricsAvailability() async {
+    try {
+      final canCheckBiometrics = await auth.canCheckBiometrics;
+      final isDeviceSupported = await auth.isDeviceSupported();
+      if (canCheckBiometrics && isDeviceSupported) {
+        state = state.copyWith(showBiometricsButton: true);
+      }
+    } catch (e) {
+      state = state.copyWith(errorMessage: "Error checking biometrics: $e");
+    }
+  }
+
+  Future<void> handleBiometricLogin(BuildContext context) async {
+    try {
+      final didAuthenticate = await auth.authenticate(
+        localizedReason: "Authenticate to login",
+        options: const AuthenticationOptions(
+          biometricOnly: true,
+          useErrorDialogs: true,
+          stickyAuth: true,
+        ),
+      );
+
+      if (didAuthenticate) {
+        ToastService.showSuccessToast(
+          context,
+          'Hello!',
+          'This is a toast notification using Toastification.',
+        );
+        // Fluttertoast.showToast(msg: "Biometric authentication successful");
+        Navigator.pushReplacementNamed(context, '/home');
+      } else {
+        state = state.copyWith(
+          errorMessage: "Biometric authentication failed",
+        );
+      }
+    } catch (e) {
+      state = state.copyWith(
+        errorMessage: "Error during biometric authentication: $e",
+      );
+    }
+  }
+}
