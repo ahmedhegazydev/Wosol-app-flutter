@@ -5,6 +5,8 @@ import 'package:flutter_apps/utils/PrefManager.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:lottie/lottie.dart';
 
+import '../custom/Common.dart';
+
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
@@ -100,10 +102,12 @@ class SplashScreenState extends State<SplashScreen>
               flex: 1,
               child: Align(
                 alignment: Alignment.bottomCenter,
-                child: SvgPicture.asset(
-                  'assets/icons/etec_logo_splash_screen.svg',
-                  width: 150,
-                ),
+                child:
+                // SvgPicture.asset(
+                //   'assets/icons/etec_logo_splash_screen.svg',
+                //   width: 150,
+                // ),
+               logoView()
               ),
             ),
           ],

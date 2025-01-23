@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_apps/NetworkManager.dart';
 import 'package:flutter_apps/utils/Common.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_skeleton_ui/flutter_skeleton_ui.dart';
+
+import '../../custom/CustomNetworkImage.dart';
 import 'TutorialNotifier.dart';
 
 class TutorialScreen extends ConsumerWidget {
   const TutorialScreen({super.key});
 
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-
     final tutorialState = ref.watch(tutorialProvider);
     final tutorialNotifier = ref.read(tutorialProvider.notifier);
 
@@ -56,7 +55,8 @@ class TutorialScreen extends ConsumerWidget {
                   }
 
                   return TutorialPage(
-                    imageUrl: UrlReplacer.replaceMediaPath(data['ItemFields']['IntroIcon']['Url']) ??
+                    imageUrl: UrlReplacer.replaceMediaPath(
+                            data['ItemFields']['IntroIcon']['Url']) ??
                         'https://via.placeholder.com/250',
                     title: data['ItemFields']['IntroTitle'] ?? 'No Title',
                     details: data['ItemFields']['IntroDetails'] ?? 'No Details',
@@ -72,7 +72,8 @@ class TutorialScreen extends ConsumerWidget {
               padding: const EdgeInsets.all(16.0),
               child: ElevatedButton(
                 onPressed: () {
-                  if (tutorialState.currentIndex < (tutorialState.introData?.length ?? 3) - 1) {
+                  if (tutorialState.currentIndex <
+                      (tutorialState.introData?.length ?? 3) - 1) {
                     tutorialState.pageController.nextPage(
                       duration: Duration(milliseconds: 300),
                       curve: Curves.easeInOut,
@@ -86,7 +87,10 @@ class TutorialScreen extends ConsumerWidget {
                   // primary: Colors.blue,
                 ),
                 child: Text(
-                  tutorialState.currentIndex == (tutorialState.introData?.length ?? 3) - 1 ? 'Start' : 'Next',
+                  tutorialState.currentIndex ==
+                          (tutorialState.introData?.length ?? 3) - 1
+                      ? 'Start'
+                      : 'Next',
                 ),
               ),
             ),
@@ -115,30 +119,41 @@ class TutorialPage extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Image.network(
-            imageUrl,
+          // Image.network(
+          //   imageUrl,
+          //   height: 250,
+          //   width: 250,
+          //   fit: BoxFit.cover,
+          //   loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
+          //     if (loadingProgress == null) {
+          //       return child; // Fully loaded
+          //     }
+          //     return Center(
+          //       child: CircularProgressIndicator(
+          //         value: loadingProgress.expectedTotalBytes != null
+          //             ? loadingProgress.cumulativeBytesLoaded / (loadingProgress.expectedTotalBytes ?? 1)
+          //             : null,
+          //       ),
+          //     );
+          //   },
+          //   errorBuilder: (BuildContext context, Object error, StackTrace? stackTrace) {
+          //     return Icon(
+          //       Icons.error,
+          //       size: 250,
+          //       color: Colors.red,
+          //     );
+          //   },
+          // ),
+          CustomNetworkImage(
+            imageUrl: imageUrl,
             height: 250,
             width: 250,
             fit: BoxFit.cover,
-            loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
-              if (loadingProgress == null) {
-                return child; // Fully loaded
-              }
-              return Center(
-                child: CircularProgressIndicator(
-                  value: loadingProgress.expectedTotalBytes != null
-                      ? loadingProgress.cumulativeBytesLoaded / (loadingProgress.expectedTotalBytes ?? 1)
-                      : null,
-                ),
-              );
-            },
-            errorBuilder: (BuildContext context, Object error, StackTrace? stackTrace) {
-              return Icon(
-                Icons.error,
-                size: 250,
-                color: Colors.red,
-              );
-            },
+            // errorWidget: const Icon(
+            //   Icons.broken_image,
+            //   size: 100,
+            //   color: Colors.grey,
+            // ),
           ),
 
           SizedBox(height: 32),

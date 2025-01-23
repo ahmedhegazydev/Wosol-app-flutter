@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_svg/svg.dart';
 
+import '../../custom/Common.dart';
+import '../../custom/CustomNetworkImage.dart';
 import 'LoginState.dart';
 
 class LoginScreen extends ConsumerWidget {
@@ -24,11 +27,26 @@ class LoginScreen extends ConsumerWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset(
-                'assets/images/lock.png',
-                width: 150,
-                height: 150,
+              SizedBox(height: 32),
+              // SvgPicture.asset(
+              //   'assets/icons/etec_logo_splash_screen.svg',
+              //   width: 150,
+              // ),
+              logoView(),
+
+              const SizedBox(height: 20),
+              CustomNetworkImage(
+                imageUrl: "imageUrl",
+                height: 250,
+                width: 250,
+                fit: BoxFit.cover,
+                // errorWidget: const Icon(
+                //   Icons.broken_image,
+                //   size: 100,
+                //   color: Colors.grey,
+                // ),
               ),
+
               const SizedBox(height: 20),
               TextField(
                 controller: state.usernameController,
