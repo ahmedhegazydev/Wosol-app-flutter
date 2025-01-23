@@ -1,6 +1,4 @@
-import 'dart:ffi';
-
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class PrefManager {
   static const String keyFirstLaunch = 'firstLaunch';
@@ -13,85 +11,89 @@ class PrefManager {
   static const String keyTestEnvironment = 'testEnvironment';
   static const String keyUserNameDevOrPrd = 'userNameDevOrPrd';
 
-  static Future<SharedPreferences> _getPrefs() async {
-    return await SharedPreferences.getInstance();
-  }
+  // Create a secure storage instance
+  static const FlutterSecureStorage _secureStorage = FlutterSecureStorage();
 
   // Setters
   static Future<void> setFirstLaunch(bool value) async {
-    final prefs = await _getPrefs();
-    await prefs.setBool(keyFirstLaunch, value);
+    await _secureStorage.write(key: keyFirstLaunch, value: value.toString());
   }
 
   static Future<void> setAppUpdateNeeded(bool value) async {
-    final prefs = await _getPrefs();
-    await prefs.setBool(keyAppUpdateNeeded, value);
+    await _secureStorage.write(key: keyAppUpdateNeeded, value: value.toString());
   }
 
   static Future<void> setIsLoggedIn(String value) async {
-    final prefs = await _getPrefs();
-    await prefs.setString(keyIsLoggedIn, value);
+    await _secureStorage.write(key: keyIsLoggedIn, value: value);
   }
 
   static Future<void> setSAPtoken(String value) async {
-    final prefs = await _getPrefs();
-    await prefs.setString(keySAPtoken, value);
+    await _secureStorage.write(key: keySAPtoken, value: value);
   }
 
   static Future<void> setTokenExpiration(String value) async {
-    final prefs = await _getPrefs();
-    await prefs.setString(keyTokenExpiration, value);
+    await _secureStorage.write(key: keyTokenExpiration, value: value);
   }
 
   static Future<void> setAppLaunched(bool value) async {
-    final prefs = await _getPrefs();
-    await prefs.setBool(keyAppLaunched, value);
+    await _secureStorage.write(key: keyAppLaunched, value: value.toString());
+  }
+
+  static Future<void> setTestPassword(String value) async {
+    await _secureStorage.write(key: keyTestPassword, value: value);
+  }
+
+  static Future<void> setTestEnvironment(String value) async {
+    await _secureStorage.write(key: keyTestEnvironment, value: value);
+  }
+
+  static Future<void> setUserNameDevOrPrd(String value) async {
+    await _secureStorage.write(key: keyUserNameDevOrPrd, value: value);
   }
 
   // Getters
   static Future<bool> getFirstLaunch() async {
-    final prefs = await _getPrefs();
-    return prefs.getBool(keyFirstLaunch) ?? false;
+    final value = await _secureStorage.read(key: keyFirstLaunch);
+    return value?.toLowerCase() == 'true';
   }
 
   static Future<bool> getAppUpdateNeeded() async {
-    final prefs = await _getPrefs();
-    return prefs.getBool(keyAppUpdateNeeded) ?? false;
+    final value = await _secureStorage.read(key: keyAppUpdateNeeded);
+    return value?.toLowerCase() == 'true';
   }
 
-  static Future<String> getIsLoggedIn() async {
-    final prefs = await _getPrefs();
-    return prefs.getString(keyIsLoggedIn) ?? '';
+  static Future<String?> getIsLoggedIn() async {
+    return await _secureStorage.read(key: keyIsLoggedIn);
   }
 
   static Future<bool?> getAppLaunched() async {
-    final prefs = await _getPrefs();
-    return prefs.getBool(keyAppLaunched);
+    final value = await _secureStorage.read(key: keyAppLaunched);
+    return value?.toLowerCase() == 'true';
   }
 
   static Future<String?> getTestPassword() async {
-    final prefs = await _getPrefs();
-    return prefs.getString(keyTestPassword);
+    return await _secureStorage.read(key: keyTestPassword);
   }
 
   static Future<String?> getTestEnvironment() async {
-    final prefs = await _getPrefs();
-    return prefs.getString(keyTestEnvironment);
+    return await _secureStorage.read(key: keyTestEnvironment);
   }
 
   static Future<String?> getUserNameDevOrPrd() async {
-    final prefs = await _getPrefs();
-    return prefs.getString(keyUserNameDevOrPrd);
+    return await _secureStorage.read(key: keyUserNameDevOrPrd);
   }
 
   static Future<String?> getSapToken() async {
-    final prefs = await _getPrefs();
-    return prefs.getString(PrefManager.keySAPtoken);
+    return await _secureStorage.read(key: keySAPtoken);
   }
 
   static Future<int?> getTokenExpiration() async {
-    final prefs = await _getPrefs();
-    return prefs.getInt(PrefManager.keyTokenExpiration);
+    final value = await _secureStorage.read(key: keyTokenExpiration);
+    return value != null ? int.tryParse(value) : null;
   }
 
+  // Clear All Stored Data
+  static Future<void> clearAll() async {
+    await _secureStorage.deleteAll();
+  }
 }
