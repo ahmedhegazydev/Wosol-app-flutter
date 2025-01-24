@@ -35,6 +35,7 @@ class LabeledTextInput extends StatefulWidget {
 }
 
 class _LabeledTextInputState extends State<LabeledTextInput> {
+  late FocusNode _focusNode;
   bool isFocused = false;
   bool hidePassword = false;
 
@@ -42,6 +43,19 @@ class _LabeledTextInputState extends State<LabeledTextInput> {
   void initState() {
     super.initState();
     hidePassword = widget.secureTextEntry;
+    _focusNode = FocusNode();
+
+    _focusNode.addListener(() {
+      setState(() {
+        isFocused = _focusNode.hasFocus;
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    _focusNode.dispose();
+    super.dispose();
   }
 
   @override
@@ -73,7 +87,7 @@ class _LabeledTextInputState extends State<LabeledTextInput> {
           padding: const EdgeInsets.symmetric(horizontal: 10),
           decoration: BoxDecoration(
             color: const Color(0xFFF9F9FE),
-            border: Border.all(color: const Color(0xFFD8D9E0), width: 0.5),
+            border: Border.all(color: const Color(0xFFD8D9E0), width: 1),
             borderRadius: BorderRadius.circular(8),
           ),
           child: Row(
@@ -90,11 +104,10 @@ class _LabeledTextInputState extends State<LabeledTextInput> {
                 ),
               Expanded(
                 child: TextField(
-                  controller: TextEditingController(
-                      text: widget.value), // Bind value to TextField
+                  focusNode: _focusNode,
+                  controller: TextEditingController(text: widget.value),
                   onChanged: widget.onChangeText,
                   obscureText: hidePassword,
-                  onFocusChange: (focus) => setState(() => isFocused = focus),
                   enabled: widget.editable,
                   decoration: const InputDecoration(
                     border: InputBorder.none,
