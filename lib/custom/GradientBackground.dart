@@ -19,7 +19,7 @@ class GradientBackground extends StatelessWidget {
               fit: BoxFit.cover,
             ),
             borderRadius: BorderRadius.circular(16),
-            ...(style?.toMap() ?? {}),
+            // ...(style?.toMap() ?? {}),
     ),
     child: ClipRRect(
     borderRadius: BorderRadius.circular(16),
