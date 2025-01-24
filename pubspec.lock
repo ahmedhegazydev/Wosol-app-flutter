@@ -41,6 +41,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.1"
+  carousel_slider_plus:
+    dependency: "direct main"
+    description:
+      name: carousel_slider_plus
+      sha256: fb0293ec9ab6a4e019e22005aa5ef9086de6ab295b60003bd18608512dd54dc8
+      url: "https://pub.dev"
+    source: hosted
+    version: "7.1.0"
   characters:
     dependency: transitive
     description:
@@ -211,6 +219,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.4.4"
+  flutter_otp_text_field:
+    dependency: "direct main"
+    description:
+      name: flutter_otp_text_field
+      sha256: "7a33285d22cafc38ea13a75ff61eff2c9b3c4860b59ba10838ad9b20ee72196d"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.4.0+2"
   flutter_plugin_android_lifecycle:
     dependency: transitive
     description:
@@ -597,6 +613,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.0.1"
+  screenshot:
+    dependency: "direct main"
+    description:
+      name: screenshot
+      sha256: "63817697a7835e6ce82add4228e15d233b74d42975c143ad8cfe07009fab866b"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.0"
   shared_preferences:
     dependency: "direct main"
     description:
