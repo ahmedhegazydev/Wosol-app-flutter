@@ -39,10 +39,10 @@ flutter:
   uses-material-design: true
 
   assets:
-      - assets/icons/etec_logo_splash_screen.svg
-      - assets/icons/wosol.svg
-      - assets/animations/splashScreen_1.json
-      - assets/animations/splashScreen_2.json
+      - assets/icons
+      - assets/images
+      - assets/animations
+
 
   # fonts:
   #   - family: Schyler
