@@ -3,6 +3,7 @@ import 'package:flutter_apps/utils/Common.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_skeleton_ui/flutter_skeleton_ui.dart';
 
+import '../../custom/CustomButton.dart';
 import '../../custom/CustomNetworkImage.dart';
 import 'TutorialNotifier.dart';
 
@@ -13,6 +14,7 @@ class TutorialScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final tutorialState = ref.watch(tutorialProvider);
     final tutorialNotifier = ref.read(tutorialProvider.notifier);
+
 
     return Scaffold(
       appBar: AppBar(
@@ -38,9 +40,7 @@ class TutorialScreen extends ConsumerWidget {
           children: [
             Expanded(
               child: PageView.builder(
-                controller: PageController(
-                  initialPage: tutorialState.currentIndex,
-                ),
+                controller: tutorialState.pageController,
                 onPageChanged: tutorialNotifier.updateCurrentIndex,
                 itemCount: tutorialState.introData?.length ?? 0,
                 itemBuilder: (context, index) {
@@ -56,8 +56,7 @@ class TutorialScreen extends ConsumerWidget {
 
                   return TutorialPage(
                     imageUrl: UrlReplacer.replaceMediaPath(
-                            data['ItemFields']['IntroIcon']['Url']) ??
-                        'https://via.placeholder.com/250',
+                            data['ItemFields']['IntroIcon']['Url']),
                     title: data['ItemFields']['IntroTitle'] ?? 'No Title',
                     details: data['ItemFields']['IntroDetails'] ?? 'No Details',
                   );
@@ -69,9 +68,13 @@ class TutorialScreen extends ConsumerWidget {
               currentIndex: tutorialState.currentIndex,
             ),
             Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: ElevatedButton(
-                onPressed: () {
+              padding: const EdgeInsets.all(40.0),
+              child: CustomButton(
+                title: tutorialState.currentIndex ==
+                        (tutorialState.introData?.length ?? 3) - 1
+                    ? 'Start'
+                    : 'Next',
+                onPress: () {
                   if (tutorialState.currentIndex <
                       (tutorialState.introData?.length ?? 3) - 1) {
                     tutorialState.pageController.nextPage(
@@ -82,16 +85,9 @@ class TutorialScreen extends ConsumerWidget {
                     Navigator.pushReplacementNamed(context, '/login');
                   }
                 },
-                style: ElevatedButton.styleFrom(
-                  minimumSize: Size(double.infinity, 50),
-                  // primary: Colors.blue,
-                ),
-                child: Text(
-                  tutorialState.currentIndex ==
-                          (tutorialState.introData?.length ?? 3) - 1
-                      ? 'Start'
-                      : 'Next',
-                ),
+                loading: false,
+                disabled: false,
+                backgroundColor: "#4C3C8D",
               ),
             ),
           ],
@@ -106,7 +102,8 @@ class TutorialPage extends StatelessWidget {
   final String title;
   final String details;
 
-  const TutorialPage({super.key, 
+  const TutorialPage({
+    super.key,
     required this.imageUrl,
     required this.title,
     required this.details,
@@ -119,43 +116,12 @@ class TutorialPage extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          // Image.network(
-          //   imageUrl,
-          //   height: 250,
-          //   width: 250,
-          //   fit: BoxFit.cover,
-          //   loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
-          //     if (loadingProgress == null) {
-          //       return child; // Fully loaded
-          //     }
-          //     return Center(
-          //       child: CircularProgressIndicator(
-          //         value: loadingProgress.expectedTotalBytes != null
-          //             ? loadingProgress.cumulativeBytesLoaded / (loadingProgress.expectedTotalBytes ?? 1)
-          //             : null,
-          //       ),
-          //     );
-          //   },
-          //   errorBuilder: (BuildContext context, Object error, StackTrace? stackTrace) {
-          //     return Icon(
-          //       Icons.error,
-          //       size: 250,
-          //       color: Colors.red,
-          //     );
-          //   },
-          // ),
           CustomNetworkImage(
             imageUrl: imageUrl,
             height: 250,
             width: 250,
             fit: BoxFit.cover,
-            // errorWidget: const Icon(
-            //   Icons.broken_image,
-            //   size: 100,
-            //   color: Colors.grey,
-            // ),
           ),
-
           SizedBox(height: 32),
           Text(
             title,
@@ -182,7 +148,8 @@ class PaginationDots extends StatelessWidget {
   final int length;
   final int currentIndex;
 
-  const PaginationDots({super.key, required this.length, required this.currentIndex});
+  const PaginationDots(
+      {super.key, required this.length, required this.currentIndex});
 
   @override
   Widget build(BuildContext context) {

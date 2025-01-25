@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_apps/utils/HexColor.dart';
+
+import '../utils/FontStyle.dart';
 
 class CustomButton extends StatefulWidget {
   final Widget? passedIcon;
@@ -7,7 +10,7 @@ class CustomButton extends StatefulWidget {
   final TextStyle? textStyle;
   final bool disabled;
   final bool loading;
-  final Color? backgroundColor;
+  final String? backgroundColor;
   final EdgeInsetsGeometry? padding;
 
   const CustomButton({
@@ -28,12 +31,12 @@ class CustomButton extends StatefulWidget {
 
 class _CustomButtonState extends State<CustomButton> {
   bool isPressed = false;
-  late Color buttonBackgroundColor;
+  late String buttonBackgroundColor;
 
   @override
   void initState() {
     super.initState();
-    buttonBackgroundColor = widget.backgroundColor ?? const Color(0xFF4C3C8D);
+    buttonBackgroundColor = widget.backgroundColor ?? "";
   }
 
   void handlePressIn() {
@@ -49,29 +52,30 @@ class _CustomButtonState extends State<CustomButton> {
     });
   }
 
-  Color getPressedColor() {
-    if (buttonBackgroundColor == Colors.white) {
-      return const Color(0xFFE8E6FD);
-    } else if (buttonBackgroundColor == Colors.black) {
-      return const Color(0xFFF1F1FD);
-    } else if (buttonBackgroundColor == const Color(0xFFF1F1FD)) {
-      return const Color(0xFF93C7EA);
-    } else if (buttonBackgroundColor == const Color(0xFF4C3C8D)) {
-      return const Color(0xFF3C3564);
-    } else if (buttonBackgroundColor == const Color(0xFFD97706)) {
-      return const Color(0xFFD97706);
-    } else if (buttonBackgroundColor == const Color(0xFF55BA83)) {
-      return const Color(0xFF55BA83);
+  String getPressedColor() {
+    if (buttonBackgroundColor == '#fff') {
+      return "#E8E6FD";
+    } else if (buttonBackgroundColor == '#000000') {
+      return "#F1F1FD";
+    } else if (buttonBackgroundColor == '#F1F1FD') {
+      return "#93C7EA";
+    } else if (buttonBackgroundColor == '#4C3C8D') {
+      return "#3C3564";
+    } else if (buttonBackgroundColor == '#D97706') {
+      return "#D97706";
+    } else if (buttonBackgroundColor == '#55BA83') {
+      return "#55BA83";
     }
     return buttonBackgroundColor;
   }
 
-  Color getTextColor() {
-    if (buttonBackgroundColor == const Color(0xFFD97706) ||
-        buttonBackgroundColor == const Color(0xFF55BA83)) {
-      return Colors.white;
+  String getTextColor() {
+    if (buttonBackgroundColor == '#D97706' ||
+        buttonBackgroundColor == '#55BA83') {
+      return "#FFFFFF";
     }
-    return Colors.black;
+    // return "#000000";
+    return "#FFFFFF";
   }
 
   @override
@@ -82,56 +86,69 @@ class _CustomButtonState extends State<CustomButton> {
       onTapUp: (_) => handlePressOut(),
       onTapCancel: handlePressOut,
       child: AnimatedContainer(
+        // constraints: const BoxConstraints.expand(), // Ensures the button fills the parent's width
         duration: const Duration(milliseconds: 100),
         padding: widget.padding ?? const EdgeInsets.all(12),
         decoration: BoxDecoration(
-          color: isPressed ? getPressedColor() : buttonBackgroundColor,
+          color:
+              HexColor(isPressed ? getPressedColor() : buttonBackgroundColor),
           borderRadius: BorderRadius.circular(12),
         ),
         child: widget.loading
             ? Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              widget.title,
-              style: widget.textStyle ??
-                  TextStyle(
-                    color: getTextColor(),
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
+          mainAxisSize: MainAxisSize.max, // Makes the Row fill the width
+          // mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    widget.title,
+                    style: widget.textStyle ??
+                        TextStyle(
+                          color: HexColor(getTextColor()),
+                          // fontSize: 16,
+                          // fontWeight: FontWeight.w500,
+                          fontFamily: Fonts.contentMedium16.fontFamily,
+                          fontSize: Fonts.contentMedium16.fontSize,
+                          height: Fonts.contentMedium16.lineHeight /
+                              Fonts.contentMedium16.fontSize,
+                          fontWeight: Fonts.contentMedium16.fontWeight,
+                        ),
                   ),
-            ),
-            const SizedBox(width: 8),
-            const CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-              strokeWidth: 2,
-            ),
-          ],
-        )
+                  const SizedBox(width: 8),
+                  const CircularProgressIndicator(
+                    valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                    strokeWidth: 2,
+                  ),
+                ],
+              )
             : Row(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              widget.title,
-              style: widget.textStyle ??
-                  TextStyle(
-                    color: getTextColor(),
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
+          mainAxisSize: MainAxisSize.max, // Makes the Row fill the width
+          // mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    widget.title,
+                    style: widget.textStyle ??
+                        TextStyle(
+                          color: HexColor(getTextColor()),
+                          // fontSize: 16,
+                          // fontWeight: FontWeight.w500,
+                          fontFamily: Fonts.contentMedium16.fontFamily,
+                          fontSize: Fonts.contentMedium16.fontSize,
+                          height: Fonts.contentMedium16.lineHeight /
+                              Fonts.contentMedium16.fontSize,
+                          fontWeight: Fonts.contentMedium16.fontWeight,
+                        ),
                   ),
-            ),
-            if (widget.passedIcon != null) ...[
-              const SizedBox(width: 8),
-              widget.passedIcon!,
-            ],
-          ],
-        ),
+                  if (widget.passedIcon != null) ...[
+                    const SizedBox(width: 8),
+                    widget.passedIcon!,
+                  ],
+                ],
+              ),
       ),
     );
   }
 }
-
 
 // CustomButton(
 // title: 'Click Me',

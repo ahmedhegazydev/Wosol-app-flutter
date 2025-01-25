@@ -3,6 +3,8 @@ import 'package:flutter_apps/utils/HexColor.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../custom/Common.dart';
+import '../../custom/CustomButton.dart';
+import '../../utils/Common.dart';
 import '../../utils/FontStyle.dart';
 import 'LoginState.dart';
 
@@ -68,11 +70,11 @@ class LoginScreen extends ConsumerWidget {
                           'Welcome Message 2',
                       style: TextStyle(
                         color: HexColor("#6C609D"),
-                        fontFamily: Fonts.subTitleBold20.fontFamily,
-                        fontSize: Fonts.subTitleBold20.fontSize,
-                        height: Fonts.subTitleBold20.lineHeight /
-                            Fonts.subTitleBold20.fontSize,
-                        fontWeight: Fonts.subTitleBold20.fontWeight,
+                        fontFamily: Fonts.subTitleRegular20.fontFamily,
+                        fontSize: Fonts.subTitleRegular20.fontSize,
+                        height: Fonts.subTitleRegular20.lineHeight /
+                            Fonts.subTitleRegular20.fontSize,
+                        fontWeight: Fonts.subTitleRegular20.fontWeight,
                       ),
                     ),
 
@@ -111,28 +113,53 @@ class LoginScreen extends ConsumerWidget {
                     ),
                     const SizedBox(height: 20),
 
-                    Text(
-                      textAlign: TextAlign.center,
-                      state.textResources?['data']?.firstWhere(
-                            (item) => (item['ItemFields']['Language'] == 'ar' &&
-                            item['ItemFields']['TextKey'] == 'ForgetPassword'),
-                        orElse: () => null,
-                      )?['ItemFields']['TextValue'] ??
-                          'Welcome Message 1',
-                      style: TextStyle(
-                        color: HexColor("#4C3C8D"),
-                        fontFamily: Fonts.titleBold28.fontFamily,
-                        fontSize: Fonts.titleBold28.fontSize,
-                        height: Fonts.titleBold28.lineHeight /
-                            Fonts.titleBold28.fontSize,
-                        fontWeight: Fonts.titleBold28.fontWeight,
+                    GestureDetector(
+                      onTap: () {
+                        WebViewUtils.pressLink(
+                            'https://selfservice.etec.gov.sa/', context);
+                      },
+                      child: Text(
+                        textAlign: TextAlign.center,
+                        state.textResources?['data']?.firstWhere(
+                              (item) =>
+                                  (item['ItemFields']['Language'] == 'ar' &&
+                                      item['ItemFields']['TextKey'] ==
+                                          'ForgetPassword'),
+                              orElse: () => null,
+                            )?['ItemFields']['TextValue'] ??
+                            'Welcome Message 1',
+                        style: TextStyle(
+                          color: HexColor("#4C3C8D"),
+                          fontFamily: Fonts.contentMedium16.fontFamily,
+                          fontSize: Fonts.contentMedium16.fontSize,
+                          height: Fonts.contentMedium16.lineHeight /
+                              Fonts.contentMedium16.fontSize,
+                          fontWeight: Fonts.contentMedium16.fontWeight,
+                        ),
                       ),
                     ),
 
-                    ElevatedButton(
-                      onPressed: () => notifier.handleLogin(context),
-                      child: Text("Login"),
+                    const SizedBox(height: 20),
+                    // ElevatedButton(
+                    //   onPressed: () => notifier.handleLogin(context),
+                    //   child: Text("Login"),
+                    // ),
+                    CustomButton(
+                      title: state.textResources?['data']?.firstWhere(
+                            (item) => (item['ItemFields']['Language'] == 'ar' &&
+                                item['ItemFields']['TextKey'] == 'Login'),
+                            orElse: () => null,
+                          )?['ItemFields']['TextValue'] ??
+                          'Welcome Message 3',
+                      onPress: () {
+                        print('Button Pressed');
+                      },
+                      loading: false,
+                      disabled: false,
+                      // passedIcon: Icon(Icons.check, color: Colors.white),
+                      backgroundColor: "#4C3C8D",
                     ),
+
                     if (state.showBiometricsButton)
                       ElevatedButton.icon(
                         onPressed: () => notifier.handleBiometricLogin(context),
