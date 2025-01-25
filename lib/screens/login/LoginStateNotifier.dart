@@ -19,7 +19,7 @@ class LoginStateNotifier extends StateNotifier<LoginState> {
 
     try {
       // Fetch text resources
-      final fetchedTextResourcesLogin = await networkManager.fetchTextResources(
+      final fetchedTextResources = await networkManager.fetchTextResources(
         {
           "lang": 'ar',
           "SiteName": 'internalportal',
@@ -30,15 +30,21 @@ class LoginStateNotifier extends StateNotifier<LoginState> {
         },
       );
 
-      final fetchedTextResourcesPermission = await networkManager.fetchTextResources(
-        {
-          "lang": 'ar',
-          "SiteName": 'internalportal',
-          "count": 100,
-          "IsAsc": false,
-          "filterName": 'ScreenName',
-          "filterValue": 'Permission',
-        },
+      // final fetchedTextResourcesPermission = await networkManager.fetchTextResources(
+      //   {
+      //     "lang": 'ar',
+      //     "SiteName": 'internalportal',
+      //     "count": 100,
+      //     "IsAsc": false,
+      //     "filterName": 'ScreenName',
+      //     "filterValue": 'Permission',
+      //   },
+      // );
+
+      state = state.copyWith(
+        textResources: fetchedTextResources,
+        // textResourcesPermission: fetchedTextResourcesPermission,
+        isLoading: false,
       );
 
     } catch (error) {
@@ -123,4 +129,9 @@ class LoginStateNotifier extends StateNotifier<LoginState> {
       );
     }
   }
+
+  void updateCurrentIndex(int index) {
+    state = state.copyWith(currentLoginTypeSelection: index);
+  }
+
 }

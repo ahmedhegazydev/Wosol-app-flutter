@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
         ],
         supportedLocales: [
           Locale('ar', ''), // Arabic
-          Locale('he', ''), // Hebrew
+          // Locale('he', ''), // Hebrew
         ],
         locale: Locale('ar', ''), // Force Arabic
         debugShowCheckedModeBanner: false,
