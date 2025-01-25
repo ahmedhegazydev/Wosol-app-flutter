@@ -9,8 +9,10 @@ class LoginState {
   final bool isLoading;
   final bool showBiometricsButton;
   final String? errorMessage;
-  final TextEditingController usernameController;
-  final TextEditingController passwordController;
+  final String? userName;
+  final String? password;
+  // final TextEditingController usernameController;
+  // final TextEditingController passwordController;
 
    Map<int, Widget> tabsLoginTypes = {
     0: Text('الدخول السريع'),
@@ -25,10 +27,13 @@ class LoginState {
     this.showBiometricsButton = false,
     this.currentLoginTypeSelection = 0,
     this.errorMessage,
-    TextEditingController? usernameController,
-    TextEditingController? passwordController,
-  })  : usernameController = usernameController ?? TextEditingController(),
-        passwordController = passwordController ?? TextEditingController();
+    this.userName,
+    this.password,
+    // TextEditingController? usernameController,
+    // TextEditingController? passwordController,
+  }) ;
+      // : usernameController = usernameController ?? TextEditingController(),
+      //   passwordController = passwordController ?? TextEditingController();
 
 
   // Add the copyWith method
@@ -39,8 +44,10 @@ class LoginState {
     bool? showBiometricsButton,
     int? currentLoginTypeSelection,
     String? errorMessage,
-    TextEditingController? usernameController,
-    TextEditingController? passwordController,
+    String? userName,
+     String? password
+    // TextEditingController? usernameController,
+    // TextEditingController? passwordController,
   }) {
     return LoginState(
       isLoading: isLoading ?? this.isLoading,
@@ -49,9 +56,11 @@ class LoginState {
 
       showBiometricsButton: showBiometricsButton ?? this.showBiometricsButton,
       errorMessage: errorMessage ?? this.errorMessage,
+      userName: userName ?? this.userName,
+      password: password ?? this.password,
       currentLoginTypeSelection: currentLoginTypeSelection ?? this.currentLoginTypeSelection,
-      usernameController: usernameController ?? this.usernameController,
-      passwordController: passwordController ?? this.passwordController,
+      // usernameController: usernameController ?? this.usernameController,
+      // passwordController: passwordController ?? this.passwordController,
     );
   }
 

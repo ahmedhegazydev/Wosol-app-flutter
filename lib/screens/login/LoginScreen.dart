@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../custom/Common.dart';
 import '../../custom/CustomButton.dart';
+import '../../custom/LabeledTextInput.dart';
 import '../../utils/Common.dart';
 import '../../utils/FontStyle.dart';
 import 'LoginState.dart';
@@ -95,12 +96,21 @@ class LoginScreen extends ConsumerWidget {
                     //   },
                     // ),
 
-                    TextField(
-                      controller: state.usernameController,
-                      decoration: InputDecoration(
-                        labelText: "Username",
-                        border: OutlineInputBorder(),
-                      ),
+                    // TextField(
+                    //   controller: state.usernameController,
+                    //   decoration: InputDecoration(
+                    //     labelText: "Username",
+                    //     border: OutlineInputBorder(),
+                    //   ),
+                    // ),
+                    LabeledTextInput(
+                      placeholder: "اسم المستخدم",
+                      secureTextEntry: true,
+                      isRequired: true,
+                      onChangeText: (value) {
+                        // print("Password: $value");
+                        notifier.updateCurrentIndex(value)
+                      },
                     ),
                     const SizedBox(height: 10),
                     TextField(
@@ -119,7 +129,7 @@ class LoginScreen extends ConsumerWidget {
                             'https://selfservice.etec.gov.sa/', context);
                       },
                       child: Text(
-                        textAlign: TextAlign.center,
+                        // textAlign: TextAlign.center,
                         state.textResources?['data']?.firstWhere(
                               (item) =>
                                   (item['ItemFields']['Language'] == 'ar' &&

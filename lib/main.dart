@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_apps/screens/login/LoginScreen.dart';
 import 'package:flutter_apps/screens/tutorial/TutorialScreen.dart';
@@ -8,6 +9,10 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'screens/SplashScreen.dart';
 
 void main() async {
+
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+
   runApp(
     ProviderScope(
       child: MyApp(),

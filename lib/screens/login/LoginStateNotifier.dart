@@ -134,4 +134,13 @@ class LoginStateNotifier extends StateNotifier<LoginState> {
     state = state.copyWith(currentLoginTypeSelection: index);
   }
 
+  void updateUsername(String useName) {
+    state = state.copyWith(useName: useName);
+  }
+
+  void updatePassword(String password) {
+    state = state.copyWith(password: password);
+  }
+
+
 }
