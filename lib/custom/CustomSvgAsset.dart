@@ -8,12 +8,12 @@ class CustomSvgAsset extends StatelessWidget {
   final BoxFit fit;
 
   const CustomSvgAsset({
-    Key? key,
+    super.key,
     required this.assetPath,
     this.width,
     this.height,
     this.fit = BoxFit.contain,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

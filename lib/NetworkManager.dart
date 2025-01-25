@@ -100,7 +100,7 @@ class NetworkManager {
       await PrefManager.setTokenExpiration(expiration);
     } catch (e) {
       print('Token refresh failed: $e');
-      throw e;
+      rethrow;
     }
   }
 
@@ -153,7 +153,7 @@ class NetworkManager {
       return response.data;
     } catch (error) {
       print("Error in getListsItemsFiltered: $error");
-      throw error;
+      rethrow;
     }
   }
 
@@ -165,7 +165,7 @@ class NetworkManager {
       return response.data;
     } catch (error) {
       print("Error in getListsItems: $error");
-      throw error;
+      rethrow;
     }
   }
 
@@ -177,7 +177,7 @@ class NetworkManager {
       return response.data;
     } catch (error) {
       print("Error in getItemById: $error");
-      throw error;
+      rethrow;
     }
   }
 
@@ -190,7 +190,7 @@ class NetworkManager {
       return response.data;
     } catch (error) {
       print("Error in sapApiRequest: $error");
-      throw error;
+      rethrow;
     }
   }
 
@@ -202,7 +202,7 @@ class NetworkManager {
       return response.data;
     } catch (error) {
       print("Error in postAuthLogin: $error");
-      throw error;
+      rethrow;
     }
   }
 
@@ -260,7 +260,7 @@ class NetworkManager {
       return response.data;
     } catch (error) {
       print("Error in fetchSapToken: $error");
-      throw error;
+      rethrow;
     }
   }
 

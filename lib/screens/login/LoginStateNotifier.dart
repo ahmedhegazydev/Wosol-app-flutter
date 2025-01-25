@@ -3,10 +3,50 @@ import 'package:flutter_apps/utils/ToastService.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:local_auth/local_auth.dart';
 
+import '../../NetworkManager.dart';
 import 'LoginState.dart';
 
 class LoginStateNotifier extends StateNotifier<LoginState> {
-  LoginStateNotifier() : super(LoginState());
+
+  final NetworkManager networkManager = NetworkManager.instance;
+
+  LoginStateNotifier() : super(LoginState()) {
+    fetchData();
+  }
+
+  Future<void> fetchData() async {
+    state = state.copyWith(isLoading: true);
+
+    try {
+      // Fetch text resources
+      final fetchedTextResourcesLogin = await networkManager.fetchTextResources(
+        {
+          "lang": 'ar',
+          "SiteName": 'internalportal',
+          "count": 100,
+          "IsAsc": false,
+          "filterName": 'ScreenName',
+          "filterValue": 'Login',
+        },
+      );
+
+      final fetchedTextResourcesPermission = await networkManager.fetchTextResources(
+        {
+          "lang": 'ar',
+          "SiteName": 'internalportal',
+          "count": 100,
+          "IsAsc": false,
+          "filterName": 'ScreenName',
+          "filterValue": 'Permission',
+        },
+      );
+
+    } catch (error) {
+      print("Error fetching data: $error");
+      state = state.copyWith(isLoading: false);
+    }
+  }
+
 
   final LocalAuthentication auth = LocalAuthentication();
 

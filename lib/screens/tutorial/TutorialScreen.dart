@@ -106,7 +106,7 @@ class TutorialPage extends StatelessWidget {
   final String title;
   final String details;
 
-  const TutorialPage({
+  const TutorialPage({super.key, 
     required this.imageUrl,
     required this.title,
     required this.details,
@@ -182,7 +182,7 @@ class PaginationDots extends StatelessWidget {
   final int length;
   final int currentIndex;
 
-  const PaginationDots({required this.length, required this.currentIndex});
+  const PaginationDots({super.key, required this.length, required this.currentIndex});
 
   @override
   Widget build(BuildContext context) {

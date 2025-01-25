@@ -8,13 +8,13 @@ class Header extends StatelessWidget {
   final Color textColor;
 
   const Header({
-    Key? key,
+    super.key,
     required this.headerName,
     this.onBackPress,
     this.showBackIcon = true,
     this.backgroundColor = Colors.white,
     this.textColor = Colors.black,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

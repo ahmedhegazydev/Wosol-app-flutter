@@ -11,7 +11,7 @@ class CustomButton extends StatefulWidget {
   final EdgeInsetsGeometry? padding;
 
   const CustomButton({
-    Key? key,
+    super.key,
     this.passedIcon,
     required this.onPress,
     required this.title,
@@ -20,7 +20,7 @@ class CustomButton extends StatefulWidget {
     this.loading = false,
     this.backgroundColor,
     this.padding,
-  }) : super(key: key);
+  });
 
   @override
   _CustomButtonState createState() => _CustomButtonState();

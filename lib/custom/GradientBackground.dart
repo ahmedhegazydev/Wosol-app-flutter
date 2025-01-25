@@ -5,10 +5,10 @@ class GradientBackground extends StatelessWidget {
   final BoxDecoration? style;
 
   const GradientBackground({
-    Key? key,
+    super.key,
     this.child,
     this.style,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

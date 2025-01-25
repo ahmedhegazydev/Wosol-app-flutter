@@ -15,7 +15,7 @@ class LabeledTextView extends StatelessWidget {
   final bool loading;
 
   const LabeledTextView({
-    Key? key,
+    super.key,
     required this.label,
     this.isRequired = false,
     this.selectedValue,
@@ -28,7 +28,7 @@ class LabeledTextView extends StatelessWidget {
     this.labelStyle,
     this.dimmed = false,
     this.loading = false,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

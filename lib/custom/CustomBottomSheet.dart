@@ -12,7 +12,7 @@ class BottomSheetWidget extends StatefulWidget {
   final bool dismissible;
 
   const BottomSheetWidget({
-    Key? key,
+    super.key,
     this.title,
     this.child,
     this.height = 620,
@@ -22,7 +22,7 @@ class BottomSheetWidget extends StatefulWidget {
     this.containerDecoration,
     this.showCloseIcon = true,
     this.dismissible = true,
-  }) : super(key: key);
+  });
 
   @override
   State<BottomSheetWidget> createState() => _BottomSheetWidgetState();

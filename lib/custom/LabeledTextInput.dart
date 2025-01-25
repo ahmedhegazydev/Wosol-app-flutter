@@ -15,7 +15,7 @@ class LabeledTextInput extends StatefulWidget {
   final bool editable;
 
   const LabeledTextInput({
-    Key? key,
+    super.key,
     this.label,
     this.value,
     this.placeholder,
@@ -28,7 +28,7 @@ class LabeledTextInput extends StatefulWidget {
     this.onChangeText,
     this.secureTextEntry = false,
     this.editable = true,
-  }) : super(key: key);
+  });
 
   @override
   State<LabeledTextInput> createState() => _LabeledTextInputState();
