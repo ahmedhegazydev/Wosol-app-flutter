@@ -22,6 +22,7 @@ FontStyle createFontStyle(double size, String weight) {
 
   final double fontSize = size;
   final double lineHeight = size * 1.2;
+  // final double lineHeight = size;
 
   final FontWeight? fontWeight = Platform.isIOS
       ? (weight == 'bold'

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_apps/utils/HexColor.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:material_segmented_control/material_segmented_control.dart';
 
 import '../../custom/Common.dart';
+import '../../utils/FontStyle.dart';
 import 'LoginState.dart';
 
 class LoginScreen extends ConsumerWidget {
@@ -36,18 +36,25 @@ class LoginScreen extends ConsumerWidget {
                       'assets/images/lock.png',
                       width: 200, // Optional: Specify width
                       height: 200, // Optional: Specify height
-                      fit: BoxFit.contain, // Optional: Adjust how the image fits
+                      fit:
+                          BoxFit.contain, // Optional: Adjust how the image fits
                     ),
                     Text(
                       textAlign: TextAlign.center,
-
                       state.textResources?['data']?.firstWhere(
                             (item) => (item['ItemFields']['Language'] == 'ar' &&
                                 item['ItemFields']['TextKey'] == 'Login'),
                             orElse: () => null,
                           )?['ItemFields']['TextValue'] ??
                           'Welcome Message 1',
-                      style: TextStyle(color: HexColor("#4C3C8D"), fontSize: 16),
+                      style: TextStyle(
+                        color: HexColor("#4C3C8D"),
+                        fontFamily: Fonts.titleBold28.fontFamily,
+                        fontSize: Fonts.titleBold28.fontSize,
+                        height: Fonts.titleBold28.lineHeight /
+                            Fonts.titleBold28.fontSize,
+                        fontWeight: Fonts.titleBold28.fontWeight,
+                      ),
                     ),
                     const SizedBox(height: 16),
                     Text(
@@ -60,8 +67,13 @@ class LoginScreen extends ConsumerWidget {
                           )?['ItemFields']['TextValue'] ??
                           'Welcome Message 2',
                       style: TextStyle(
-
-                          color: HexColor("#6C609D"), fontSize: 16),
+                        color: HexColor("#6C609D"),
+                        fontFamily: Fonts.subTitleBold20.fontFamily,
+                        fontSize: Fonts.subTitleBold20.fontSize,
+                        height: Fonts.subTitleBold20.lineHeight /
+                            Fonts.subTitleBold20.fontSize,
+                        fontWeight: Fonts.subTitleBold20.fontWeight,
+                      ),
                     ),
 
                     const SizedBox(height: 20),
@@ -98,6 +110,25 @@ class LoginScreen extends ConsumerWidget {
                       obscureText: true,
                     ),
                     const SizedBox(height: 20),
+
+                    Text(
+                      textAlign: TextAlign.center,
+                      state.textResources?['data']?.firstWhere(
+                            (item) => (item['ItemFields']['Language'] == 'ar' &&
+                            item['ItemFields']['TextKey'] == 'ForgetPassword'),
+                        orElse: () => null,
+                      )?['ItemFields']['TextValue'] ??
+                          'Welcome Message 1',
+                      style: TextStyle(
+                        color: HexColor("#4C3C8D"),
+                        fontFamily: Fonts.titleBold28.fontFamily,
+                        fontSize: Fonts.titleBold28.fontSize,
+                        height: Fonts.titleBold28.lineHeight /
+                            Fonts.titleBold28.fontSize,
+                        fontWeight: Fonts.titleBold28.fontWeight,
+                      ),
+                    ),
+
                     ElevatedButton(
                       onPressed: () => notifier.handleLogin(context),
                       child: Text("Login"),

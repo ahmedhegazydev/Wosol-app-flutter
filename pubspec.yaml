@@ -31,14 +31,16 @@ dependencies:
   screenshot: ^3.0.0
   carousel_slider_plus: ^7.1.0
   flutter_otp_text_field: ^1.4.0+2
-#  biometric_signature: ^6.2.0
+  url_launcher: ^6.3.1
+  webview_flutter: ^4.10.0
+
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   mockito: ^5.4.0
   # Or use mocktail
-  mocktail: ^0.3.0
+  mocktail: ^1.0.4
   flutter_lints: ^5.0.0
 
 flutter:
