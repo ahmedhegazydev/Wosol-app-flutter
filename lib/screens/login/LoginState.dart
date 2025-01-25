@@ -12,7 +12,7 @@ class LoginState {
   final TextEditingController usernameController;
   final TextEditingController passwordController;
 
-  final Map<int, Widget>? tabsLoginTypes = {
+   Map<int, Widget> tabsLoginTypes = {
     0: Text('الدخول السريع'),
     1: Text('تسجيل الدخول'),
   };

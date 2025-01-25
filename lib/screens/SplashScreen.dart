@@ -103,10 +103,6 @@ class SplashScreenState extends State<SplashScreen>
               child: Align(
                 alignment: Alignment.bottomCenter,
                 child:
-                // SvgPicture.asset(
-                //   'assets/icons/etec_logo_splash_screen.svg',
-                //   width: 150,
-                // ),
                logoView()
               ),
             ),

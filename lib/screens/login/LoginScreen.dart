@@ -13,7 +13,6 @@ class LoginScreen extends ConsumerWidget {
     final state = ref.watch(loginStateProvider);
     final notifier = ref.read(loginStateProvider.notifier);
 
-
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -68,32 +67,30 @@ class LoginScreen extends ConsumerWidget {
                     Text(
                       state.textResources?['data']?.firstWhere(
                             (item) => (item['ItemFields']['Language'] == 'ar' &&
-                            item['ItemFields']['TextKey'] == 'WelcomeLetter'),
-                        orElse: () => null,
-                      )?['ItemFields']['TextValue'] ??
+                                item['ItemFields']['TextKey'] ==
+                                    'WelcomeLetter'),
+                            orElse: () => null,
+                          )?['ItemFields']['TextValue'] ??
                           'Welcome Message 2',
                       style: TextStyle(color: Colors.grey, fontSize: 16),
                     ),
 
                     const SizedBox(height: 20),
-                MaterialSegmentedControl(
-                  children: state.tabsLoginTypes,
-                  selectionIndex: state.currentLoginTypeSelection,
-                  borderColor: Colors.grey,
-                  selectedColor: Colors.redAccent,
-                  unselectedColor: Colors.white,
-                  selectedTextStyle: TextStyle(color: Colors.white),
-                  unselectedTextStyle: TextStyle(color: Colors.redAccent),
-                  borderWidth: 0.7,
-                  borderRadius: 32.0,
-                  disabledChildren: [3],
-                  onSegmentTapped: (index) {
-                    notifier.updat
-                    setState(() {
-                      _currentSelection = index;
-                    });
-                  },
-                ),
+                    MaterialSegmentedControl(
+                      children: state.tabsLoginTypes,
+                      selectionIndex: state.currentLoginTypeSelection,
+                      borderColor: Colors.grey,
+                      selectedColor: Colors.redAccent,
+                      unselectedColor: Colors.white,
+                      selectedTextStyle: TextStyle(color: Colors.white),
+                      unselectedTextStyle: TextStyle(color: Colors.redAccent),
+                      borderWidth: 0.7,
+                      borderRadius: 32.0,
+                      disabledChildren: [3],
+                      onSegmentTapped: (index) {
+                        notifier.updateCurrentIndex(index);
+                      },
+                    ),
                     TextField(
                       controller: state.usernameController,
                       decoration: InputDecoration(

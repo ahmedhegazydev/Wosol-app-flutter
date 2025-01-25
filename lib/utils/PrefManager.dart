@@ -12,7 +12,12 @@ class PrefManager {
   static const String keyUserNameDevOrPrd = 'userNameDevOrPrd';
 
   // Create a secure storage instance
-  static const FlutterSecureStorage _secureStorage = FlutterSecureStorage();
+  static FlutterSecureStorage _secureStorage = FlutterSecureStorage();
+
+  /// Public setter for secure storage instance (used for testing)
+  static void setSecureStorage(FlutterSecureStorage instance) {
+    _secureStorage = instance;
+  }
 
   // Setters
   static Future<void> setFirstLaunch(bool value) async {
