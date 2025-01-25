@@ -84,6 +84,7 @@ class _LabeledTextInputState extends State<LabeledTextInput> {
           ),
         const SizedBox(height: 8),
         Container(
+          height: 50,
           padding: const EdgeInsets.symmetric(horizontal: 10),
           decoration: BoxDecoration(
             color: const Color(0xFFF9F9FE),

@@ -88,7 +88,7 @@ class _CustomButtonState extends State<CustomButton> {
       child: AnimatedContainer(
         // constraints: const BoxConstraints.expand(), // Ensures the button fills the parent's width
         duration: const Duration(milliseconds: 100),
-        padding: widget.padding ?? const EdgeInsets.all(12),
+        padding: widget.padding ?? const EdgeInsets.all(15),
         decoration: BoxDecoration(
           color:
               HexColor(isPressed ? getPressedColor() : buttonBackgroundColor),

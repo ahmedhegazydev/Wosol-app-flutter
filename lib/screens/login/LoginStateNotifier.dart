@@ -58,8 +58,10 @@ class LoginStateNotifier extends StateNotifier<LoginState> {
 
   Future<void> handleLogin(BuildContext context) async {
     state = state.copyWith(isLoading: true, errorMessage: null);
-    final username = state.usernameController.text;
-    final password = state.passwordController.text;
+    // final username = state.usernameController.text;
+    // final password = state.passwordController.text;
+    final username = state.userName ?? "";
+    final password = state.password ?? "";
 
     if (username.isEmpty || password.isEmpty) {
       state = state.copyWith(
@@ -135,7 +137,7 @@ class LoginStateNotifier extends StateNotifier<LoginState> {
   }
 
   void updateUsername(String useName) {
-    state = state.copyWith(useName: useName);
+    state = state.copyWith(userName: useName);
   }
 
   void updatePassword(String password) {
