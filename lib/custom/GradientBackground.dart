@@ -13,22 +13,21 @@ class GradientBackground extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage('assets/images/gradient_bg.png'),
-              fit: BoxFit.cover,
-            ),
-            borderRadius: BorderRadius.circular(16),
-            // ...(style?.toMap() ?? {}),
-    ),
-    child: ClipRRect(
-    borderRadius: BorderRadius.circular(16),
-    child: child,
-    ),
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage('assets/images/gradient_bg.png'),
+          fit: BoxFit.cover,
+        ),
+        borderRadius: BorderRadius.circular(16),
+        // ...(style?.toMap() ?? {}),
+      ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(16),
+        child: child,
+      ),
     );
   }
 }
-
 
 // GradientBackground(
 // child: Center(

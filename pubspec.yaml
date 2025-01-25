@@ -39,11 +39,9 @@ dev_dependencies:
   mockito: ^5.4.0
   # Or use mocktail
   mocktail: ^0.3.0
-
   flutter_lints: ^5.0.0
 
 flutter:
-
   uses-material-design: true
 
   assets:
@@ -51,16 +49,13 @@ flutter:
       - assets/images/
       - assets/animations/
 
-
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
-  #   - family: Trajan Pro
-  #     fonts:
-  #       - asset: fonts/TrajanPro.ttf
-  #       - asset: fonts/TrajanPro_Bold.ttf
-  #         weight: 700
-  #
+  fonts:
+    - family: IBM Plex Sans Arabic
+      fonts:
+        - asset: assets/fonts/ibm_plex_sans_arabic_regular.ttf
+        - asset: assets/fonts/ibm_plex_sans_arabic_bold.ttf
+          weight: 700
+        - asset: assets/fonts/ibm_plex_sans_arabic_semibold.ttf
+          weight: 600
+        - asset: assets/fonts/ibm_plex_sans_arabic_medium.ttf
+          weight: 500

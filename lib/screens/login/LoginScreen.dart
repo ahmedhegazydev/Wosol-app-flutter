@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_apps/utils/HexColor.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:material_segmented_control/material_segmented_control.dart';
 
@@ -14,10 +15,10 @@ class LoginScreen extends ConsumerWidget {
     final notifier = ref.read(loginStateProvider.notifier);
 
     return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: Text("Login", style: TextStyle(color: Colors.white)),
-      ),
+      // appBar: AppBar(
+      //   automaticallyImplyLeading: false,
+      //   title: Text("Login", style: TextStyle(color: Colors.white)),
+      // ),
       body: state.isLoading
           ? Center(child: CircularProgressIndicator())
           : SingleChildScrollView(
@@ -26,45 +27,31 @@ class LoginScreen extends ConsumerWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    SizedBox(height: 32),
-                    // SvgPicture.asset(
-                    //   'assets/icons/etec_logo_splash_screen.svg',
-                    //   width: 150,
-                    // ),
+                    SizedBox(height: 50),
                     logoView(),
 
                     const SizedBox(height: 20),
-                    // CustomNetworkImage(
-                    //   imageUrl: "imageUrl",
-                    //   height: 250,
-                    //   width: 250,
-                    //   fit: BoxFit.cover,
-                    //   // errorWidget: const Icon(
-                    //   //   Icons.broken_image,
-                    //   //   size: 100,
-                    //   //   color: Colors.grey,
-                    //   // ),
-                    // ),
-                    Container(
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: AssetImage('assets/images/lock.png'),
-                          fit: BoxFit.cover,
-                        ),
-                        borderRadius: BorderRadius.circular(16),
-                      ),
+
+                    Image.asset(
+                      'assets/images/lock.png',
+                      width: 200, // Optional: Specify width
+                      height: 200, // Optional: Specify height
+                      fit: BoxFit.contain, // Optional: Adjust how the image fits
                     ),
                     Text(
+                      textAlign: TextAlign.center,
+
                       state.textResources?['data']?.firstWhere(
                             (item) => (item['ItemFields']['Language'] == 'ar' &&
                                 item['ItemFields']['TextKey'] == 'Login'),
                             orElse: () => null,
                           )?['ItemFields']['TextValue'] ??
                           'Welcome Message 1',
-                      style: TextStyle(color: Colors.grey, fontSize: 16),
+                      style: TextStyle(color: HexColor("#4C3C8D"), fontSize: 16),
                     ),
-                    const SizedBox(height: 20),
+                    const SizedBox(height: 16),
                     Text(
+                      textAlign: TextAlign.center,
                       state.textResources?['data']?.firstWhere(
                             (item) => (item['ItemFields']['Language'] == 'ar' &&
                                 item['ItemFields']['TextKey'] ==
@@ -72,25 +59,28 @@ class LoginScreen extends ConsumerWidget {
                             orElse: () => null,
                           )?['ItemFields']['TextValue'] ??
                           'Welcome Message 2',
-                      style: TextStyle(color: Colors.grey, fontSize: 16),
+                      style: TextStyle(
+
+                          color: HexColor("#6C609D"), fontSize: 16),
                     ),
 
                     const SizedBox(height: 20),
-                    MaterialSegmentedControl(
-                      children: state.tabsLoginTypes,
-                      selectionIndex: state.currentLoginTypeSelection,
-                      borderColor: Colors.grey,
-                      selectedColor: Colors.redAccent,
-                      unselectedColor: Colors.white,
-                      selectedTextStyle: TextStyle(color: Colors.white),
-                      unselectedTextStyle: TextStyle(color: Colors.redAccent),
-                      borderWidth: 0.7,
-                      borderRadius: 32.0,
-                      disabledChildren: [3],
-                      onSegmentTapped: (index) {
-                        notifier.updateCurrentIndex(index);
-                      },
-                    ),
+                    // MaterialSegmentedControl(
+                    //   children: state.tabsLoginTypes,
+                    //   selectionIndex: state.currentLoginTypeSelection,
+                    //   borderColor: Colors.grey,
+                    //   selectedColor: Colors.redAccent,
+                    //   unselectedColor: Colors.white,
+                    //   selectedTextStyle: TextStyle(color: Colors.white),
+                    //   unselectedTextStyle: TextStyle(color: Colors.redAccent),
+                    //   borderWidth: 0.7,
+                    //   borderRadius: 32.0,
+                    //   disabledChildren: [3],
+                    //   onSegmentTapped: (index) {
+                    //     notifier.updateCurrentIndex(index);
+                    //   },
+                    // ),
+
                     TextField(
                       controller: state.usernameController,
                       decoration: InputDecoration(
