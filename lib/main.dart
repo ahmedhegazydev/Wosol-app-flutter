@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_apps/screens/login/LoginScreen.dart';
+import 'package:flutter_apps/screens/login/LoginState.dart';
 import 'package:flutter_apps/screens/tutorial/TutorialScreen.dart';
 import 'package:flutter_apps/utils/Constants.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -16,9 +17,13 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
+  // final initialState = await LoginState.initialize();
+
   runApp(
     ProviderScope(
-      child: MyApp(),
+      child: MyApp(
+          // initialState: initialState
+      ),
     ),
   );
 }

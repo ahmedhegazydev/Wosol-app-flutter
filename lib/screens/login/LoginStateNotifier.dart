@@ -7,7 +7,6 @@ import '../../NetworkManager.dart';
 import 'LoginState.dart';
 
 class LoginStateNotifier extends StateNotifier<LoginState> {
-
   final NetworkManager networkManager = NetworkManager.instance;
 
   LoginStateNotifier() : super(LoginState()) {
@@ -34,13 +33,11 @@ class LoginStateNotifier extends StateNotifier<LoginState> {
         textResources: fetchedTextResources,
         isLoading: false,
       );
-
     } catch (error) {
       print("Error fetching data: $error");
       state = state.copyWith(isLoading: false);
     }
   }
-
 
   final LocalAuthentication auth = LocalAuthentication();
 
@@ -133,6 +130,4 @@ class LoginStateNotifier extends StateNotifier<LoginState> {
   void setIsQuickAccessSelected(bool isQuickAccessSelected) {
     state = state.copyWith(isQuickAccessSelected: isQuickAccessSelected);
   }
-
-
 }
