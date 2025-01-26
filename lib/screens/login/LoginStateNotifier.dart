@@ -30,20 +30,8 @@ class LoginStateNotifier extends StateNotifier<LoginState> {
         },
       );
 
-      // final fetchedTextResourcesPermission = await networkManager.fetchTextResources(
-      //   {
-      //     "lang": 'ar',
-      //     "SiteName": 'internalportal',
-      //     "count": 100,
-      //     "IsAsc": false,
-      //     "filterName": 'ScreenName',
-      //     "filterValue": 'Permission',
-      //   },
-      // );
-
       state = state.copyWith(
         textResources: fetchedTextResources,
-        // textResourcesPermission: fetchedTextResourcesPermission,
         isLoading: false,
       );
 
@@ -58,8 +46,6 @@ class LoginStateNotifier extends StateNotifier<LoginState> {
 
   Future<void> handleLogin(BuildContext context) async {
     state = state.copyWith(isLoading: true, errorMessage: null);
-    // final username = state.usernameController.text;
-    // final password = state.passwordController.text;
     final username = state.userName ?? "";
     final password = state.password ?? "";
 
@@ -142,6 +128,10 @@ class LoginStateNotifier extends StateNotifier<LoginState> {
 
   void updatePassword(String password) {
     state = state.copyWith(password: password);
+  }
+
+  void setIsQuickAccessSelected(bool isQuickAccessSelected) {
+    state = state.copyWith(isQuickAccessSelected: isQuickAccessSelected);
   }
 
 

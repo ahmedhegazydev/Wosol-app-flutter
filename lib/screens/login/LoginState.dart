@@ -5,14 +5,12 @@ import 'LoginStateNotifier.dart';
 
 class LoginState {
   final Map<String, dynamic>? textResources;
-  // final Map<String, dynamic>? textResourcesPermission;
   final bool isLoading;
   final bool showBiometricsButton;
+  final bool isQuickAccessSelected;
   final String? errorMessage;
   final String? userName;
   final String? password;
-  // final TextEditingController usernameController;
-  // final TextEditingController passwordController;
 
    Map<int, Widget> tabsLoginTypes = {
     0: Text('الدخول السريع'),
@@ -23,44 +21,35 @@ class LoginState {
   LoginState({
     this.isLoading = false,
     this.textResources,
-    // this.textResourcesPermission,
     this.showBiometricsButton = false,
+    this.isQuickAccessSelected = false,
     this.currentLoginTypeSelection = 0,
     this.errorMessage,
     this.userName,
     this.password,
-    // TextEditingController? usernameController,
-    // TextEditingController? passwordController,
   }) ;
-      // : usernameController = usernameController ?? TextEditingController(),
-      //   passwordController = passwordController ?? TextEditingController();
 
 
   // Add the copyWith method
   LoginState copyWith({
     bool? isLoading,
     Map<String, dynamic>? textResources,
-    // Map<String, dynamic>? textResourcesPermission,
     bool? showBiometricsButton,
+    bool? isQuickAccessSelected,
     int? currentLoginTypeSelection,
     String? errorMessage,
     String? userName,
      String? password
-    // TextEditingController? usernameController,
-    // TextEditingController? passwordController,
   }) {
     return LoginState(
       isLoading: isLoading ?? this.isLoading,
       textResources: textResources ?? this.textResources,
-      // textResourcesPermission: textResourcesPermission ?? this.textResourcesPermission,
-
       showBiometricsButton: showBiometricsButton ?? this.showBiometricsButton,
+      isQuickAccessSelected: isQuickAccessSelected ?? this.isQuickAccessSelected,
       errorMessage: errorMessage ?? this.errorMessage,
       userName: userName ?? this.userName,
       password: password ?? this.password,
       currentLoginTypeSelection: currentLoginTypeSelection ?? this.currentLoginTypeSelection,
-      // usernameController: usernameController ?? this.usernameController,
-      // passwordController: passwordController ?? this.passwordController,
     );
   }
 

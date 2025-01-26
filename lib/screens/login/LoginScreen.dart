@@ -29,15 +29,12 @@ class LoginScreen extends ConsumerWidget {
                   children: [
                     SizedBox(height: 50),
                     logoView(),
-
                     const SizedBox(height: 20),
-
                     Image.asset(
                       'assets/images/lock.png',
                       width: 200,
                       height: 200,
-                      fit:
-                          BoxFit.contain,
+                      fit: BoxFit.contain,
                     ),
                     Text(
                       textAlign: TextAlign.center,
@@ -75,70 +72,75 @@ class LoginScreen extends ConsumerWidget {
                         fontWeight: Fonts.subTitleRegular20.fontWeight,
                       ),
                     ),
-
                     const SizedBox(height: 20),
-
                     Row(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                    Text(
-                      'تسجيل الدخول',
-                      style: TextStyle(
-                        color: HexColor("#4C3C8D"),
-                        fontFamily: Fonts.contentRegular16.fontFamily,
-                        fontSize: Fonts.contentRegular16.fontSize,
-                        height: Fonts.contentRegular16.lineHeight /
-                            Fonts.contentRegular16.fontSize,
-                        fontWeight: Fonts.contentRegular16.fontWeight,
-                      ),
+                        GestureDetector(
+                          onTap: () {
+                            notifier.setIsQuickAccessSelected(false);
+                          },
+                          child: Text(
+                            'تسجيل الدخول',
+                            style: TextStyle(
+                              color: HexColor("#4C3C8D"),
+                              fontFamily: Fonts.contentRegular16.fontFamily,
+                              fontSize: Fonts.contentRegular16.fontSize,
+                              height: Fonts.contentRegular16.lineHeight /
+                                  Fonts.contentRegular16.fontSize,
+                              fontWeight: Fonts.contentRegular16.fontWeight,
+                            ),
+                          ),
+                        ),
+                        // Vertical Divider
+                        Container(
+                          height: 20,
+                          width: 1,
+                          color: Colors.purple,
+                          margin: EdgeInsets.symmetric(horizontal: 16),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            notifier.setIsQuickAccessSelected(true);
+                          },
+                          child: Text(
+                            'الدخول السريع',
+                            style: TextStyle(
+                              color: HexColor("#4C3C8D"),
+                              fontFamily: Fonts.contentRegular16.fontFamily,
+                              fontSize: Fonts.contentRegular16.fontSize,
+                              height: Fonts.contentRegular16.lineHeight /
+                                  Fonts.contentRegular16.fontSize,
+                              fontWeight: Fonts.contentRegular16.fontWeight,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                    // Vertical Divider
-                    Container(
-                      height: 20,
-                      width: 1,
-                      color: Colors.purple,
-                      margin: EdgeInsets.symmetric(horizontal: 16),
-                    ),
-
-                    Text(
-                      'الدخول السريع',
-                      style: TextStyle(
-                        color: HexColor("#4C3C8D"),
-                        fontFamily: Fonts.contentRegular16.fontFamily,
-                        fontSize: Fonts.contentRegular16.fontSize,
-                        height: Fonts.contentRegular16.lineHeight /
-                            Fonts.contentRegular16.fontSize,
-                        fontWeight: Fonts.contentRegular16.fontWeight,
-                      ),
-                    ),
-                  ],),
-
                     const SizedBox(height: 20),
-
                     LabeledTextInput(
-                      // value: "a.ali@dev",
+                      value: "a.ali@dev",
                       placeholder: "اسم المستخدم",
                       secureTextEntry: false,
                       isRequired: true,
                       onChangeText: (value) {
-                        // notifier.updateUsername(value);
+                        notifier.updateUsername(value);
+                        // print(value);
                       },
                     ),
-
                     const SizedBox(height: 10),
-
                     LabeledTextInput(
-                      // value: "Wosol2030@",
+                      value: "Wosol2030@",
                       placeholder: "كلمة المرور",
                       secureTextEntry: true,
                       isRequired: true,
                       onChangeText: (value) {
-                        // notifier.updatePassword(value);
+                        notifier.updatePassword(value);
+                        // print(value);
                       },
                     ),
                     const SizedBox(height: 20),
-
                     SizedBox(
                       width: double.infinity,
                       child: GestureDetector(
@@ -149,11 +151,11 @@ class LoginScreen extends ConsumerWidget {
                         child: Text(
                           state.textResources?['data']?.firstWhere(
                                 (item) =>
-                            (item['ItemFields']['Language'] == 'ar' &&
-                                item['ItemFields']['TextKey'] ==
-                                    'ForgetPassword'),
-                            orElse: () => null,
-                          )?['ItemFields']['TextValue'] ??
+                                    (item['ItemFields']['Language'] == 'ar' &&
+                                        item['ItemFields']['TextKey'] ==
+                                            'ForgetPassword'),
+                                orElse: () => null,
+                              )?['ItemFields']['TextValue'] ??
                               'Welcome Message 1',
                           style: TextStyle(
                             color: HexColor("#4C3C8D"),
@@ -167,29 +169,28 @@ class LoginScreen extends ConsumerWidget {
                         ),
                       ),
                     ),
-
-
                     const SizedBox(height: 150),
-                    CustomButton(
-                      title: state.textResources?['data']?.firstWhere(
-                            (item) => (item['ItemFields']['Language'] == 'ar' &&
-                                item['ItemFields']['TextKey'] == 'Login'),
-                            orElse: () => null,
-                          )?['ItemFields']['TextValue'] ??
-                          'Welcome Message 3',
-                      onPress: () {
-                        print('Button Pressed');
-                      },
-                      loading: false,
-                      disabled: false,
-                      backgroundColor: "#4C3C8D",
-                    ),
-
                     if (state.showBiometricsButton)
                       ElevatedButton.icon(
                         onPressed: () => notifier.handleBiometricLogin(context),
                         icon: Icon(Icons.fingerprint),
                         label: Text("Login with Biometrics"),
+                      )
+                    else
+                      CustomButton(
+                        title: state.textResources?['data']?.firstWhere(
+                              (item) =>
+                                  (item['ItemFields']['Language'] == 'ar' &&
+                                      item['ItemFields']['TextKey'] == 'Login'),
+                              orElse: () => null,
+                            )?['ItemFields']['TextValue'] ??
+                            'Welcome Message 3',
+                        onPress: () {
+                          print('Button Pressed');
+                        },
+                        loading: false,
+                        disabled: false,
+                        backgroundColor: "#4C3C8D",
                       ),
                     if (state.errorMessage != null)
                       Padding(
