@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../utils/FontStyle.dart';
+
 class LabeledTextInput extends StatefulWidget {
   final String? label;
   final String? value;
@@ -38,12 +40,14 @@ class _LabeledTextInputState extends State<LabeledTextInput> {
   late FocusNode _focusNode;
   bool isFocused = false;
   bool hidePassword = false;
+  late TextEditingController _controller;
 
   @override
   void initState() {
     super.initState();
     hidePassword = widget.secureTextEntry;
     _focusNode = FocusNode();
+    _controller = TextEditingController(text: widget.value);
 
     _focusNode.addListener(() {
       setState(() {
@@ -53,8 +57,18 @@ class _LabeledTextInputState extends State<LabeledTextInput> {
   }
 
   @override
+  void didUpdateWidget(covariant LabeledTextInput oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    if (widget.value != oldWidget.value && widget.value != _controller.text) {
+      _controller.text = widget.value ?? '';
+    }
+  }
+
+  @override
   void dispose() {
     _focusNode.dispose();
+    _controller.dispose();
     super.dispose();
   }
 
@@ -69,10 +83,13 @@ class _LabeledTextInputState extends State<LabeledTextInput> {
               Text(
                 widget.label!,
                 style: widget.labelStyle ??
-                    const TextStyle(
+                    TextStyle(
                       color: Color(0xFF4C3C8D),
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
+                      fontFamily: Fonts.contentRegular16.fontFamily,
+                      fontSize: Fonts.contentRegular16.fontSize,
+                      height: Fonts.contentRegular16.lineHeight /
+                          Fonts.contentRegular16.fontSize,
+                      fontWeight: Fonts.contentRegular16.fontWeight,
                     ),
               ),
               if (widget.isRequired)
@@ -93,44 +110,46 @@ class _LabeledTextInputState extends State<LabeledTextInput> {
           ),
           child: Row(
             children: [
-              if (!isFocused &&
-                  (widget.value == null || widget.value!.isEmpty))
+              if (!isFocused && _controller.text.isEmpty)
                 Text(
                   widget.placeholder ?? '',
                   style: TextStyle(
                     color: widget.placeholderTextColor,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w400,
+                    fontFamily: Fonts.contentRegular16.fontFamily,
+                    fontSize: Fonts.contentRegular16.fontSize,
+                    height: Fonts.contentRegular16.lineHeight /
+                        Fonts.contentRegular16.fontSize,
+                    fontWeight: Fonts.contentRegular16.fontWeight,
+                  ),
+                )
+              ,
+              // else
+                Expanded(
+                  child: TextField(
+                    focusNode: _focusNode,
+                    controller: _controller,
+                    onChanged: widget.onChangeText,
+                    obscureText: hidePassword,
+                    enabled: widget.editable,
+                    decoration: const InputDecoration(
+                      border: InputBorder.none,
+                      isDense: true,
+                    ),
+                    style: widget.inputStyle ??
+                        const TextStyle(
+                          color: Color(0xFF4C3C8D),
+                          fontSize: 16,
+                          fontWeight: FontWeight.w400,
+                        ),
                   ),
                 ),
-              Expanded(
-                child: TextField(
-                  focusNode: _focusNode,
-                  controller: TextEditingController(text: widget.value),
-                  onChanged: widget.onChangeText,
-                  obscureText: hidePassword,
-                  enabled: widget.editable,
-                  decoration: const InputDecoration(
-                    border: InputBorder.none,
-                    isDense: true,
-                  ),
-                  style: widget.inputStyle ??
-                      const TextStyle(
-                        color: Color(0xFF4C3C8D),
-                        fontSize: 16,
-                        fontWeight: FontWeight.w400,
-                      ),
-                ),
-              ),
               if (widget.secureTextEntry)
                 GestureDetector(
                   onTap: () {
                     setState(() => hidePassword = !hidePassword);
                   },
                   child: Icon(
-                    hidePassword
-                        ? Icons.visibility_off
-                        : Icons.visibility, // Replace with custom icons if needed
+                    hidePassword ? Icons.visibility_off : Icons.visibility,
                     size: 20,
                     color: Colors.grey,
                   ),
@@ -138,10 +157,13 @@ class _LabeledTextInputState extends State<LabeledTextInput> {
               else if (widget.currencySymbol != null)
                 Text(
                   widget.currencySymbol!,
-                  style: const TextStyle(
+                  style: TextStyle(
                     color: Color(0xFF6C609D),
-                    fontSize: 16,
-                    fontWeight: FontWeight.w400,
+                    fontFamily: Fonts.contentRegular16.fontFamily,
+                    fontSize: Fonts.contentRegular16.fontSize,
+                    height: Fonts.contentRegular16.lineHeight /
+                        Fonts.contentRegular16.fontSize,
+                    fontWeight: Fonts.contentRegular16.fontWeight,
                   ),
                 ),
             ],
@@ -151,14 +173,3 @@ class _LabeledTextInputState extends State<LabeledTextInput> {
     );
   }
 }
-
-
-// LabeledTextInput(
-// label: "Password",
-// placeholder: "Enter your password",
-// secureTextEntry: true,
-// isRequired: true,
-// onChangeText: (value) {
-// print("Password: $value");
-// },
-// ),

@@ -86,7 +86,6 @@ class _CustomButtonState extends State<CustomButton> {
       onTapUp: (_) => handlePressOut(),
       onTapCancel: handlePressOut,
       child: AnimatedContainer(
-        // constraints: const BoxConstraints.expand(), // Ensures the button fills the parent's width
         duration: const Duration(milliseconds: 100),
         padding: widget.padding ?? const EdgeInsets.all(15),
         decoration: BoxDecoration(
@@ -96,8 +95,7 @@ class _CustomButtonState extends State<CustomButton> {
         ),
         child: widget.loading
             ? Row(
-          mainAxisSize: MainAxisSize.max, // Makes the Row fill the width
-          // mainAxisSize: MainAxisSize.min,
+          mainAxisSize: MainAxisSize.max,
                 children: [
                   Text(
                     widget.title,
@@ -121,8 +119,7 @@ class _CustomButtonState extends State<CustomButton> {
                 ],
               )
             : Row(
-          mainAxisSize: MainAxisSize.max, // Makes the Row fill the width
-          // mainAxisSize: MainAxisSize.min,
+          mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
@@ -149,14 +146,3 @@ class _CustomButtonState extends State<CustomButton> {
     );
   }
 }
-
-// CustomButton(
-// title: 'Click Me',
-// onPress: () {
-// print('Button Pressed');
-// },
-// loading: false,
-// disabled: false,
-// passedIcon: Icon(Icons.check, color: Colors.white),
-// backgroundColor: Colors.purple,
-// );

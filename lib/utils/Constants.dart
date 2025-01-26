@@ -38,4 +38,7 @@ class Constants {
 
   // Other constants
   static const String VALUE_IS_LOGGED_IN = 'loggedin';
+  static const String FORGET_PASSWORD_URL = 'https://selfservice.etec.gov.sa/';
+
+
 }

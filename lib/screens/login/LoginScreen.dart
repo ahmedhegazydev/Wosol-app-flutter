@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_apps/utils/Constants.dart';
 import 'package:flutter_apps/utils/HexColor.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -18,10 +19,6 @@ class LoginScreen extends ConsumerWidget {
     final notifier = ref.read(loginStateProvider.notifier);
 
     return Scaffold(
-      // appBar: AppBar(
-      //   automaticallyImplyLeading: false,
-      //   title: Text("Login", style: TextStyle(color: Colors.white)),
-      // ),
       body: state.isLoading
           ? Center(child: CircularProgressIndicator())
           : SingleChildScrollView(
@@ -37,10 +34,10 @@ class LoginScreen extends ConsumerWidget {
 
                     Image.asset(
                       'assets/images/lock.png',
-                      width: 200, // Optional: Specify width
-                      height: 200, // Optional: Specify height
+                      width: 200,
+                      height: 200,
                       fit:
-                          BoxFit.contain, // Optional: Adjust how the image fits
+                          BoxFit.contain,
                     ),
                     Text(
                       textAlign: TextAlign.center,
@@ -82,16 +79,12 @@ class LoginScreen extends ConsumerWidget {
                     const SizedBox(height: 20),
 
                     Row(
-                      mainAxisSize: MainAxisSize.max, // Makes the Row fill the width
-                      // mainAxisSize: MainAxisSize.min,
+                      mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                     Text(
                       'تسجيل الدخول',
                       style: TextStyle(
-                        // fontSize: 18,
-                        // fontWeight: FontWeight.bold,
-                        // color: Colors.purple,
                         color: HexColor("#4C3C8D"),
                         fontFamily: Fonts.contentRegular16.fontFamily,
                         fontSize: Fonts.contentRegular16.fontSize,
@@ -102,12 +95,12 @@ class LoginScreen extends ConsumerWidget {
                     ),
                     // Vertical Divider
                     Container(
-                      height: 20, // Adjust height based on your text
+                      height: 20,
                       width: 1,
                       color: Colors.purple,
-                      margin: EdgeInsets.symmetric(horizontal: 16), // Space around the line
+                      margin: EdgeInsets.symmetric(horizontal: 16),
                     ),
-                    // Second Text
+
                     Text(
                       'الدخول السريع',
                       style: TextStyle(
@@ -124,30 +117,34 @@ class LoginScreen extends ConsumerWidget {
                     const SizedBox(height: 20),
 
                     LabeledTextInput(
+                      // value: "a.ali@dev",
                       placeholder: "اسم المستخدم",
                       secureTextEntry: false,
                       isRequired: true,
                       onChangeText: (value) {
-                        notifier.updateUsername(value);
+                        // notifier.updateUsername(value);
                       },
                     ),
+
                     const SizedBox(height: 10),
+
                     LabeledTextInput(
+                      // value: "Wosol2030@",
                       placeholder: "كلمة المرور",
                       secureTextEntry: true,
                       isRequired: true,
                       onChangeText: (value) {
-                        notifier.updatePassword(value);
+                        // notifier.updatePassword(value);
                       },
                     ),
                     const SizedBox(height: 20),
 
                     SizedBox(
-                      width: double.infinity, // Fills the maximum width
+                      width: double.infinity,
                       child: GestureDetector(
                         onTap: () {
                           WebViewUtils.pressLink(
-                              'https://selfservice.etec.gov.sa/', context);
+                              Constants.FORGET_PASSWORD_URL, context);
                         },
                         child: Text(
                           state.textResources?['data']?.firstWhere(
@@ -187,8 +184,6 @@ class LoginScreen extends ConsumerWidget {
                       disabled: false,
                       backgroundColor: "#4C3C8D",
                     ),
-
-                    // Spacer(),
 
                     if (state.showBiometricsButton)
                       ElevatedButton.icon(
