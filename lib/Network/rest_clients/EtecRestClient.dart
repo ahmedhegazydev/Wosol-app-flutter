@@ -7,6 +7,7 @@ part 'EtecRestClient.g.dart';
 
 @RestApi(baseUrl: Constants.BASE_URL_ETEC)
 abstract class EtecRestClient {
+
   factory EtecRestClient(Dio dio, {String? baseUrl}) = _EtecRestClient;
 
 

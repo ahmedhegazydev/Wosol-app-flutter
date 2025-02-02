@@ -135,40 +135,52 @@ class NetworkManager {
     return _sapApi;
   }
 
-  // Get filtered list items
-  Future<dynamic> getListsItemsFiltered(Map<String, dynamic> params) async {
-    try {
-      final response = await _wosolApi.get(Constants.GET_LISTS_ITEMS_FILTERED,
-          queryParameters: params);
-      return response.data;
-    } catch (error) {
-      print("Error in getListsItemsFiltered: $error");
-      rethrow;
-    }
+  // // Get filtered list items
+  // Future<dynamic> getListsItemsFiltered(Map<String, dynamic> params) async {
+  //   try {
+  //     final response = await _wosolApi.get(Constants.GET_LISTS_ITEMS_FILTERED,
+  //         queryParameters: params);
+  //     return response.data;
+  //   } catch (error) {
+  //     print("Error in getListsItemsFiltered: $error");
+  //     rethrow;
+  //   }
+  // }
+  //
+  // // Get list items
+  // Future<dynamic> getListsItems(Map<String, dynamic> params) async {
+  //   try {
+  //     final response = await _wosolApi.get(Constants.GET_LISTS_ITEMS,
+  //         queryParameters: params);
+  //     return response.data;
+  //   } catch (error) {
+  //     print("Error in getListsItems: $error");
+  //     rethrow;
+  //   }
+  // }
+  //
+  // // Get item by ID
+  // Future<dynamic> getItemById(Map<String, dynamic> params) async {
+  //   try {
+  //     final response = await _wosolApi.get(Constants.GET_ITEM_BY_ID,
+  //         queryParameters: params);
+  //     return response.data;
+  //   } catch (error) {
+  //     print("Error in getItemById: $error");
+  //     rethrow;
+  //   }
+  // }
+
+  Future<List<dynamic>> getListsItemsFiltered(Map<String, dynamic> params) {
+    return etecRestClient.getListsItemsFiltered(params);
   }
 
-  // Get list items
-  Future<dynamic> getListsItems(Map<String, dynamic> params) async {
-    try {
-      final response = await _wosolApi.get(Constants.GET_LISTS_ITEMS,
-          queryParameters: params);
-      return response.data;
-    } catch (error) {
-      print("Error in getListsItems: $error");
-      rethrow;
-    }
+  Future<List<dynamic>> getListsItems(Map<String, dynamic> params) {
+    return etecRestClient.getListsItems(params);
   }
 
-  // Get item by ID
-  Future<dynamic> getItemById(Map<String, dynamic> params) async {
-    try {
-      final response = await _wosolApi.get(Constants.GET_ITEM_BY_ID,
-          queryParameters: params);
-      return response.data;
-    } catch (error) {
-      print("Error in getItemById: $error");
-      rethrow;
-    }
+  Future<Map<String, dynamic>> getItemById(Map<String, dynamic> params) {
+    return etecRestClient.getItemById(params);
   }
 
   // SAP API request
