@@ -3,9 +3,14 @@ import 'package:dio_smart_retry/dio_smart_retry.dart';
 import 'package:flutter_apps/utils/Constants.dart';
 import 'package:flutter_apps/utils/PrefManager.dart';
 
+import 'Network/SapRestClient.dart';
+
 class NetworkManager {
   late Dio _wosolApi;
   late Dio _sapApi;
+
+  // late SapRestClient sapRestClient;
+  // late EtecRestClient etecRestClient;
 
   static final NetworkManager _instance = NetworkManager._internal();
 
@@ -14,6 +19,9 @@ class NetworkManager {
   NetworkManager._internal() {
     _wosolApi = _createDioInstance(Constants.BASE_URL_ETEC);
     _sapApi = _createDioInstance(Constants.BASE_URL_SAP);
+
+    // sapRestClient = SapRestClient(_sapApi);
+    // etecRestClient = EtecRestClient(_wosolApi);
   }
 
   Dio _createDioInstance(String baseUrl) {
@@ -123,27 +131,6 @@ class NetworkManager {
     _sapApi.options.headers['Authorization'] = 'Bearer $token';
     return _sapApi;
   }
-
-  // Future<dynamic> get(String endPoint,
-  //     {required Map<String, dynamic> params}) async {
-  //   try {
-  //     final response = await _wosolApi.get(endPoint, queryParameters: params);
-  //     return response.data;
-  //   } catch (e) {
-  //     print('GET request failed: $e');
-  //     throw e;
-  //   }
-  // }
-  //
-  // Future<dynamic> post(String endPoint, {dynamic data}) async {
-  //   try {
-  //     final response = await _wosolApi.post(endPoint, data: data);
-  //     return response.data;
-  //   } catch (e) {
-  //     print('POST request failed: $e');
-  //     throw e;
-  //   }
-  // }
 
   // Get filtered list items
   Future<dynamic> getListsItemsFiltered(Map<String, dynamic> params) async {
