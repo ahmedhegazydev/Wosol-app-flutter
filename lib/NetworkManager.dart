@@ -1,16 +1,19 @@
 import 'package:dio/dio.dart';
 import 'package:dio_smart_retry/dio_smart_retry.dart';
+import 'package:flutter_apps/Network/data/tutorial/ItemTutorial.dart';
 import 'package:flutter_apps/utils/Constants.dart';
 import 'package:flutter_apps/utils/PrefManager.dart';
 
-import 'Network/SapRestClient.dart';
+import 'Network/rest_clients/EtecRestClient.dart';
+import 'Network/rest_clients/SapRestClient.dart';
+
 
 class NetworkManager {
   late Dio _wosolApi;
   late Dio _sapApi;
 
-  // late SapRestClient sapRestClient;
-  // late EtecRestClient etecRestClient;
+  late SapRestClient sapRestClient;
+  late EtecRestClient etecRestClient;
 
   static final NetworkManager _instance = NetworkManager._internal();
 
@@ -20,8 +23,8 @@ class NetworkManager {
     _wosolApi = _createDioInstance(Constants.BASE_URL_ETEC);
     _sapApi = _createDioInstance(Constants.BASE_URL_SAP);
 
-    // sapRestClient = SapRestClient(_sapApi);
-    // etecRestClient = EtecRestClient(_wosolApi);
+    sapRestClient = SapRestClient(_sapApi);
+    etecRestClient = EtecRestClient(_wosolApi);
   }
 
   Dio _createDioInstance(String baseUrl) {
@@ -259,6 +262,18 @@ class NetworkManager {
       final defaultParams = {'listName': 'textResources'};
       final combinedParams = {...defaultParams, ...params};
       final response = await getListsItemsFiltered(combinedParams);
+
+      // Deserialize the response into a list of Items
+      final items = (response as List<dynamic>)
+          .map((item) => ItemTutorial.fromJson(item as Map<String, dynamic>))
+          .toList();
+
+      return {
+        'data': items,
+        'isLoading': false,
+        'error': null,
+        // 'screen': screen,
+      };
 
       return {
         'data': response,
