@@ -7,7 +7,6 @@ import 'package:flutter_apps/utils/PrefManager.dart';
 import 'Network/rest_clients/EtecRestClient.dart';
 import 'Network/rest_clients/SapRestClient.dart';
 
-
 class NetworkManager {
   late Dio _wosolApi;
   late Dio _sapApi;
@@ -175,13 +174,13 @@ class NetworkManager {
     return etecRestClient.getListsItemsFiltered(params);
   }
 
-  Future<List<dynamic>> getListsItems(Map<String, dynamic> params) {
-    return etecRestClient.getListsItems(params);
-  }
-
-  Future<Map<String, dynamic>> getItemById(Map<String, dynamic> params) {
-    return etecRestClient.getItemById(params);
-  }
+  // Future<List<dynamic>> getListsItems(Map<String, dynamic> params) {
+  //   return etecRestClient.getListsItems(params);
+  // }
+  //
+  // Future<Map<String, dynamic>> getItemById(Map<String, dynamic> params) {
+  //   return etecRestClient.getItemById(params);
+  // }
 
   // SAP API request
   Future<dynamic> sapApiRequest(String endPoint,

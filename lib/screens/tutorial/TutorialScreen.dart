@@ -15,7 +15,6 @@ class TutorialScreen extends ConsumerWidget {
     final tutorialState = ref.watch(tutorialProvider);
     final tutorialNotifier = ref.read(tutorialProvider.notifier);
 
-
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -56,7 +55,7 @@ class TutorialScreen extends ConsumerWidget {
 
                   return TutorialPage(
                     imageUrl: UrlReplacer.replaceMediaPath(
-                            data['ItemFields']['IntroIcon']['Url']),
+                        data['ItemFields']['IntroIcon']['Url']),
                     title: data['ItemFields']['IntroTitle'] ?? 'No Title',
                     details: data['ItemFields']['IntroDetails'] ?? 'No Details',
                   );

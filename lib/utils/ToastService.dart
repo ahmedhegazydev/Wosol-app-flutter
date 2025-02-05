@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:toastification/toastification.dart';
 
 class ToastService {
-  static void showSuccessToast(BuildContext context, String title, String description) {
+  static void showSuccessToast(
+      BuildContext context, String title, String description) {
     toastification.show(
       context: context, // optional if you use ToastificationWrapper
       type: ToastificationType.success,
@@ -10,7 +11,8 @@ class ToastService {
       autoCloseDuration: const Duration(seconds: 5),
       title: Text('Hello, World!'),
       // you can also use RichText widget for title and description parameters
-      description: RichText(text: const TextSpan(text: 'This is a sample toast message. ')),
+      description: RichText(
+          text: const TextSpan(text: 'This is a sample toast message. ')),
       alignment: Alignment.topRight,
       direction: TextDirection.ltr,
       animationDuration: const Duration(milliseconds: 300),
@@ -45,14 +47,17 @@ class ToastService {
       applyBlurEffect: true,
       callbacks: ToastificationCallbacks(
         onTap: (toastItem) => print('Toast ${toastItem.id} tapped'),
-        onCloseButtonTap: (toastItem) => print('Toast ${toastItem.id} close button tapped'),
-        onAutoCompleteCompleted: (toastItem) => print('Toast ${toastItem.id} auto complete completed'),
+        onCloseButtonTap: (toastItem) =>
+            print('Toast ${toastItem.id} close button tapped'),
+        onAutoCompleteCompleted: (toastItem) =>
+            print('Toast ${toastItem.id} auto complete completed'),
         onDismissed: (toastItem) => print('Toast ${toastItem.id} dismissed'),
       ),
     );
   }
 
-  static void showErrorToast(BuildContext context, String title, String description) {
+  static void showErrorToast(
+      BuildContext context, String title, String description) {
     // showToastification(
     //   context: context,
     //   title: title,

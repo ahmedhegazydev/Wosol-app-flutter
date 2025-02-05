@@ -6,7 +6,8 @@ class AnalyticsService {
   /// Logs a custom event.
   /// [eventName] is the name of the event.
   /// [params] are additional parameters to log with the event.
-  static Future<void> logEvent(String eventName, {Map<String, Object>? params}) async {
+  static Future<void> logEvent(String eventName,
+      {Map<String, Object>? params}) async {
     try {
       await _analytics.logEvent(name: eventName, parameters: params);
       // print('Event logged: $eventName, $params');
@@ -19,7 +20,8 @@ class AnalyticsService {
   /// [screenName] is the name of the screen.
   static Future<void> logScreenView(String screenName) async {
     try {
-      await _analytics.setCurrentScreen(screenName: screenName, screenClassOverride: screenName);
+      await _analytics.setCurrentScreen(
+          screenName: screenName, screenClassOverride: screenName);
       // print('Screen viewed: $screenName');
     } catch (error) {
       // print('Failed to log screen view: $screenName, $error');
@@ -35,7 +37,8 @@ class AnalyticsService {
   /// Logs swipe refresh action.
   /// [buttonName] is the name associated with the swipe action.
   static Future<void> logSwipeRefreshed(String buttonName) async {
-    await logEvent('swipe_pulled_refreshed', params: {'button_name': buttonName});
+    await logEvent('swipe_pulled_refreshed',
+        params: {'button_name': buttonName});
   }
 
   /// Logs dispatch events.

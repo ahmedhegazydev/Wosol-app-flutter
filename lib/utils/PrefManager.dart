@@ -25,7 +25,8 @@ class PrefManager {
   }
 
   static Future<void> setAppUpdateNeeded(bool value) async {
-    await _secureStorage.write(key: keyAppUpdateNeeded, value: value.toString());
+    await _secureStorage.write(
+        key: keyAppUpdateNeeded, value: value.toString());
   }
 
   static Future<void> setIsLoggedIn(String value) async {

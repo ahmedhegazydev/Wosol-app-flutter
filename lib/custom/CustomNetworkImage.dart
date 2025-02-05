@@ -23,19 +23,22 @@ class CustomNetworkImage extends StatelessWidget {
       height: height,
       width: width,
       fit: fit,
-      loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
+      loadingBuilder: (BuildContext context, Widget child,
+          ImageChunkEvent? loadingProgress) {
         if (loadingProgress == null) {
           return child; // Fully loaded
         }
         return Center(
           child: CircularProgressIndicator(
             value: loadingProgress.expectedTotalBytes != null
-                ? loadingProgress.cumulativeBytesLoaded / (loadingProgress.expectedTotalBytes ?? 1)
+                ? loadingProgress.cumulativeBytesLoaded /
+                    (loadingProgress.expectedTotalBytes ?? 1)
                 : null,
           ),
         );
       },
-      errorBuilder: (BuildContext context, Object error, StackTrace? stackTrace) {
+      errorBuilder:
+          (BuildContext context, Object error, StackTrace? stackTrace) {
         return errorWidget ??
             Icon(
               Icons.error,

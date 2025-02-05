@@ -36,8 +36,8 @@ dependencies:
   firebase_analytics: ^11.4.1
   flutter_pdfview: ^1.4.0
 #  dots_indicator: ^3.0.0
-  retrofit: ^4.4.0
-  logger: ^2.4.0  # for logging purpose
+  retrofit: ^4.4.2
+  logger: ^2.5.0
   json_annotation: ^4.9.0
 
 
@@ -49,9 +49,9 @@ dev_dependencies:
   mocktail: ^1.0.4
   flutter_lints: ^5.0.0
 
-  retrofit_generator: '>=8.0.0 <10.0.0' # for Dart 3.3 use ^9.0.0
-  build_runner: ^2.3.3
-  json_serializable: ^6.8.0
+  retrofit_generator: ^9.1.7
+  build_runner: ^2.4.14
+  json_serializable: ^6.9.3
 
 flutter:
   uses-material-design: true

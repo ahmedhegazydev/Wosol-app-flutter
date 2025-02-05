@@ -59,50 +59,53 @@ class LabeledTextView extends StatelessWidget {
         // Content or Loader
         loading
             ? Container(
-          width: double.infinity,
-          height: 50,
-          decoration: BoxDecoration(
-            color: const Color(0xFFF1FAFF),
-            borderRadius: BorderRadius.circular(16),
-          ),
-        )
+                width: double.infinity,
+                height: 50,
+                decoration: BoxDecoration(
+                  color: const Color(0xFFF1FAFF),
+                  borderRadius: BorderRadius.circular(16),
+                ),
+              )
             : GestureDetector(
-          onTap: onPress,
-          child: Container(
-            height: 48,
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            decoration: BoxDecoration(
-              color: dimmed ? const Color(0xFFEFF0F3) : const Color(0xFFF9F9FE),
-              border: Border.all(color: const Color(0xFFD8D9E0), width: 1),
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Expanded(
-                  child: Text(
-                    selectedValue ?? placeholder,
-                    style: inputStyle ??
-                        TextStyle(
-                          color: selectedValue != null
-                              ? const Color(0xFF4C3C8D)
-                              : const Color(0xFF7F818C),
-                          fontSize: 16,
-                          fontWeight: FontWeight.w400,
+                onTap: onPress,
+                child: Container(
+                  height: 48,
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  decoration: BoxDecoration(
+                    color: dimmed
+                        ? const Color(0xFFEFF0F3)
+                        : const Color(0xFFF9F9FE),
+                    border:
+                        Border.all(color: const Color(0xFFD8D9E0), width: 1),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: Text(
+                          selectedValue ?? placeholder,
+                          style: inputStyle ??
+                              TextStyle(
+                                color: selectedValue != null
+                                    ? const Color(0xFF4C3C8D)
+                                    : const Color(0xFF7F818C),
+                                fontSize: 16,
+                                fontWeight: FontWeight.w400,
+                              ),
+                          textAlign: TextAlign.left,
                         ),
-                    textAlign: TextAlign.left,
+                      ),
+                      if (showDropdown)
+                        Icon(
+                          Icons.arrow_drop_down,
+                          size: 23,
+                          color: arrowFillColor,
+                        ),
+                    ],
                   ),
                 ),
-                if (showDropdown)
-                  Icon(
-                    Icons.arrow_drop_down,
-                    size: 23,
-                    color: arrowFillColor,
-                  ),
-              ],
-            ),
-          ),
-        ),
+              ),
       ],
     );
   }

@@ -14,8 +14,9 @@ void main() {
     PrefManager.setSecureStorage(mockStorage); // Inject mock storage
 
     // Mock the write, read, and deleteAll methods to return Futures
-    when(() => mockStorage.write(key: any(named: 'key'), value: any(named: 'value')))
-        .thenAnswer((_) async {});
+    when(() => mockStorage.write(
+        key: any(named: 'key'),
+        value: any(named: 'value'))).thenAnswer((_) async {});
 
     when(() => mockStorage.read(key: any(named: 'key')))
         .thenAnswer((_) async => null);
@@ -29,7 +30,9 @@ void main() {
       await PrefManager.setFirstLaunch(true);
 
       // Assert
-      verify(() => mockStorage.write(key: PrefManager.keyFirstLaunch, value: 'true')).called(1);
+      verify(() =>
+              mockStorage.write(key: PrefManager.keyFirstLaunch, value: 'true'))
+          .called(1);
     });
 
     test('getFirstLaunch returns true', () async {
@@ -50,7 +53,8 @@ void main() {
       await PrefManager.setIsLoggedIn('loggedInValue');
 
       // Assert
-      verify(() => mockStorage.write(key: PrefManager.keyIsLoggedIn, value: 'loggedInValue')).called(1);
+      verify(() => mockStorage.write(
+          key: PrefManager.keyIsLoggedIn, value: 'loggedInValue')).called(1);
     });
 
     test('getIsLoggedIn retrieves the correct value', () async {
@@ -71,7 +75,8 @@ void main() {
       await PrefManager.setAppUpdateNeeded(false);
 
       // Assert
-      verify(() => mockStorage.write(key: PrefManager.keyAppUpdateNeeded, value: 'false')).called(1);
+      verify(() => mockStorage.write(
+          key: PrefManager.keyAppUpdateNeeded, value: 'false')).called(1);
     });
 
     test('getAppUpdateNeeded returns false', () async {
@@ -84,7 +89,8 @@ void main() {
 
       // Assert
       expect(result, false);
-      verify(() => mockStorage.read(key: PrefManager.keyAppUpdateNeeded)).called(1);
+      verify(() => mockStorage.read(key: PrefManager.keyAppUpdateNeeded))
+          .called(1);
     });
 
     test('clearAll deletes all stored data', () async {

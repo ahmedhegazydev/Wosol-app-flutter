@@ -177,7 +177,6 @@ import '../utils/FontStyle.dart';
 //   }
 // }
 
-
 class LabeledTextInput extends StatefulWidget {
   final String? label;
   final String? value;
@@ -279,8 +278,8 @@ class _LabeledTextInputState extends State<LabeledTextInput> {
               color: widget.placeholderTextColor,
               fontFamily: Fonts.contentRegular16.fontFamily,
               fontSize: Fonts.contentRegular16.fontSize,
-              height:
-              Fonts.contentRegular16.lineHeight / Fonts.contentRegular16.fontSize,
+              height: Fonts.contentRegular16.lineHeight /
+                  Fonts.contentRegular16.fontSize,
               fontWeight: Fonts.contentRegular16.fontWeight,
             ),
             contentPadding: const EdgeInsets.symmetric(
@@ -301,37 +300,35 @@ class _LabeledTextInputState extends State<LabeledTextInput> {
             ),
             suffixIcon: widget.secureTextEntry
                 ? GestureDetector(
-              onTap: () {
-                setState(() {
-                  hidePassword = !hidePassword;
-                });
-              },
-              child: Icon(
-                hidePassword
-                    ? Icons.visibility_off
-                    : Icons.visibility,
-                color: Colors.grey,
-              ),
-            )
+                    onTap: () {
+                      setState(() {
+                        hidePassword = !hidePassword;
+                      });
+                    },
+                    child: Icon(
+                      hidePassword ? Icons.visibility_off : Icons.visibility,
+                      color: Colors.grey,
+                    ),
+                  )
                 : widget.currencySymbol != null
-                ? Padding(
-              padding: const EdgeInsets.only(right: 8.0),
-              child: Text(
-                widget.currencySymbol!,
-                style: TextStyle(
-                  color: const Color(0xFF6C609D),
-                  fontFamily: Fonts.contentRegular16.fontFamily,
-                  fontSize: Fonts.contentRegular16.fontSize,
-                  height: Fonts.contentRegular16.lineHeight /
-                      Fonts.contentRegular16.fontSize,
-                  fontWeight: Fonts.contentRegular16.fontWeight,
-                ),
-              ),
-            )
-                : null,
+                    ? Padding(
+                        padding: const EdgeInsets.only(right: 8.0),
+                        child: Text(
+                          widget.currencySymbol!,
+                          style: TextStyle(
+                            color: const Color(0xFF6C609D),
+                            fontFamily: Fonts.contentRegular16.fontFamily,
+                            fontSize: Fonts.contentRegular16.fontSize,
+                            height: Fonts.contentRegular16.lineHeight /
+                                Fonts.contentRegular16.fontSize,
+                            fontWeight: Fonts.contentRegular16.fontWeight,
+                          ),
+                        ),
+                      )
+                    : null,
           ),
           style: widget.inputStyle ??
-               TextStyle(
+              TextStyle(
                 color: const Color(0xFF6C609D),
                 fontFamily: Fonts.contentRegular16.fontFamily,
                 fontSize: Fonts.contentRegular16.fontSize,

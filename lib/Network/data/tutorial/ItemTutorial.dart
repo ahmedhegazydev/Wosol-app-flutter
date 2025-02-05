@@ -9,7 +9,8 @@ class ItemTutorial {
 
   ItemTutorial({required this.itemId, required this.itemFields});
 
-  factory ItemTutorial.fromJson(Map<String, dynamic> json) => _$ItemTutorialFromJson(json);
+  factory ItemTutorial.fromJson(Map<String, dynamic> json) =>
+      _$ItemTutorialFromJson(json);
   Map<String, dynamic> toJson() => _$ItemTutorialToJson(this);
 }
 

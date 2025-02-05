@@ -15,14 +15,12 @@ class TutorialState {
     PageController? pageController,
   }) : pageController = pageController ?? PageController(initialPage: 0);
 
-
   TutorialState copyWith({
     bool? isLoading,
     Map<String, dynamic>? textResources,
     Map<int, dynamic>? introData,
     int? currentIndex,
     PageController? pageController,
-
   }) {
     return TutorialState(
       isLoading: isLoading ?? this.isLoading,
@@ -30,7 +28,6 @@ class TutorialState {
       introData: introData ?? this.introData,
       currentIndex: currentIndex ?? this.currentIndex,
       pageController: pageController ?? this.pageController,
-
     );
   }
 }

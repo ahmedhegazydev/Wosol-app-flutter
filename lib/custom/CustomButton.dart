@@ -95,7 +95,7 @@ class _CustomButtonState extends State<CustomButton> {
         ),
         child: widget.loading
             ? Row(
-          mainAxisSize: MainAxisSize.max,
+                mainAxisSize: MainAxisSize.max,
                 children: [
                   Text(
                     widget.title,
@@ -119,7 +119,7 @@ class _CustomButtonState extends State<CustomButton> {
                 ],
               )
             : Row(
-          mainAxisSize: MainAxisSize.max,
+                mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(

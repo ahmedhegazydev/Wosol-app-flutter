@@ -11,7 +11,6 @@ import 'firebase_options.dart';
 import 'screens/SplashScreen.dart';
 
 void main() async {
-
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
@@ -23,7 +22,7 @@ void main() async {
     ProviderScope(
       child: MyApp(
           // initialState: initialState
-      ),
+          ),
     ),
   );
 }

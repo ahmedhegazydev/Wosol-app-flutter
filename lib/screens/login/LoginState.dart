@@ -48,12 +48,13 @@ class LoginState {
       isLoading: isLoading ?? this.isLoading,
       textResources: textResources ?? this.textResources,
       showBiometricsButton: showBiometricsButton ?? this.showBiometricsButton,
-      isQuickAccessSelected: isQuickAccessSelected ?? this.isQuickAccessSelected,
+      isQuickAccessSelected:
+          isQuickAccessSelected ?? this.isQuickAccessSelected,
       errorMessage: errorMessage ?? this.errorMessage,
       userName: userName ?? this.userName,
       password: password ?? this.password,
       currentLoginTypeSelection:
-      currentLoginTypeSelection ?? this.currentLoginTypeSelection,
+          currentLoginTypeSelection ?? this.currentLoginTypeSelection,
       storedUserName: storedUserName ?? this.storedUserName,
       tabsLoginTypes: this.tabsLoginTypes,
     );
@@ -67,6 +68,6 @@ class LoginState {
 }
 
 final loginStateProvider =
-StateNotifierProvider<LoginStateNotifier, LoginState>(
-      (ref) => LoginStateNotifier(),
+    StateNotifierProvider<LoginStateNotifier, LoginState>(
+  (ref) => LoginStateNotifier(),
 );

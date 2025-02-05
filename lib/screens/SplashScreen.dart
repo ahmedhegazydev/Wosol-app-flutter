@@ -46,14 +46,16 @@ class SplashScreenState extends State<SplashScreen>
       if (mounted) {
         Navigator.pushReplacementNamed(context, Constants.TUTORIAL);
       }
-    } else if (isLoggedIn == Constants.VALUE_IS_LOGGED_IN && !isAppUpdateNeeded) {
+    } else if (isLoggedIn == Constants.VALUE_IS_LOGGED_IN &&
+        !isAppUpdateNeeded) {
       if (mounted) {
         Navigator.pushReplacementNamed(context, Constants.HOME);
       }
     } else {
       if (mounted) {
         // Navigator.pushReplacementNamed(context, Constants.LOGIN);
-        Navigator.pushReplacementNamed(context, Constants.TUTORIAL);//for testing
+        Navigator.pushReplacementNamed(
+            context, Constants.TUTORIAL); //for testing
       }
     }
 
@@ -100,11 +102,8 @@ class SplashScreenState extends State<SplashScreen>
             ),
             Expanded(
               flex: 1,
-              child: Align(
-                alignment: Alignment.bottomCenter,
-                child:
-               logoView()
-              ),
+              child:
+                  Align(alignment: Alignment.bottomCenter, child: logoView()),
             ),
           ],
         ),

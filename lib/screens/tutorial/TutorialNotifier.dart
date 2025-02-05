@@ -45,8 +45,7 @@ class TutorialNotifier extends StateNotifier<TutorialState> {
   }
 }
 
-
 // Define the provider
 final tutorialProvider = StateNotifierProvider<TutorialNotifier, TutorialState>(
-      (ref) => TutorialNotifier(),
+  (ref) => TutorialNotifier(),
 );

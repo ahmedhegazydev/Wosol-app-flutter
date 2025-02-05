@@ -26,12 +26,12 @@ FontStyle createFontStyle(double size, String weight) {
 
   final FontWeight? fontWeight = Platform.isIOS
       ? (weight == 'bold'
-      ? FontWeight.w700
-      : weight == 'semibold'
-      ? FontWeight.w600
-      : weight == 'medium'
-      ? FontWeight.w500
-      : FontWeight.w400)
+          ? FontWeight.w700
+          : weight == 'semibold'
+              ? FontWeight.w600
+              : weight == 'medium'
+                  ? FontWeight.w500
+                  : FontWeight.w400)
       : null;
 
   return FontStyle(
