@@ -1,9 +1,17 @@
 import 'package:flutter/material.dart';
 
+import '../../Network/data/tutorial/ItemTutorial.dart';
+
 class TutorialState {
   final bool isLoading;
-  final Map<String, dynamic>? textResources;
+
+  // final Map<String, dynamic>? textResources;
+  final List<ItemTutorial>? textResources;
+
+
   final Map<int, dynamic>? introData;
+  // final List<ItemTutorial>? introData;
+
   final int currentIndex;
   final PageController pageController;
 
@@ -17,8 +25,12 @@ class TutorialState {
 
   TutorialState copyWith({
     bool? isLoading,
-    Map<String, dynamic>? textResources,
+    // Map<String, dynamic>? textResources,
+    List<ItemTutorial>? textResources,
+
     Map<int, dynamic>? introData,
+    // List<ItemTutorial>? introData,
+
     int? currentIndex,
     PageController? pageController,
   }) {
