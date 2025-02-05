@@ -134,177 +134,129 @@ class NetworkManager {
     return _sapApi;
   }
 
-  // // Get filtered list items
-  // Future<dynamic> getListsItemsFiltered(Map<String, dynamic> params) async {
-  //   try {
-  //     final response = await _wosolApi.get(Constants.GET_LISTS_ITEMS_FILTERED,
-  //         queryParameters: params);
-  //     return response.data;
-  //   } catch (error) {
-  //     print("Error in getListsItemsFiltered: $error");
-  //     rethrow;
-  //   }
-  // }
-  //
-  // // Get list items
-  // Future<dynamic> getListsItems(Map<String, dynamic> params) async {
-  //   try {
-  //     final response = await _wosolApi.get(Constants.GET_LISTS_ITEMS,
-  //         queryParameters: params);
-  //     return response.data;
-  //   } catch (error) {
-  //     print("Error in getListsItems: $error");
-  //     rethrow;
-  //   }
-  // }
-  //
-  // // Get item by ID
-  // Future<dynamic> getItemById(Map<String, dynamic> params) async {
-  //   try {
-  //     final response = await _wosolApi.get(Constants.GET_ITEM_BY_ID,
-  //         queryParameters: params);
-  //     return response.data;
-  //   } catch (error) {
-  //     print("Error in getItemById: $error");
-  //     rethrow;
-  //   }
-  // }
-
-  Future<List<dynamic>> getListsItemsFiltered(Map<String, dynamic> params) {
+  Future<Map<String, dynamic>> getListsItemsFiltered(Map<String, dynamic> params) {
     return etecRestClient.getListsItemsFiltered(params);
   }
 
-  // Future<List<dynamic>> getListsItems(Map<String, dynamic> params) {
-  //   return etecRestClient.getListsItems(params);
-  // }
-  //
-  // Future<Map<String, dynamic>> getItemById(Map<String, dynamic> params) {
-  //   return etecRestClient.getItemById(params);
-  // }
+  Future<Map<String, dynamic>> getListsItems(Map<String, dynamic> params) {
+    return etecRestClient.getListsItems(params);
+  }
+
+  Future<Map<String, dynamic>> getItemById(Map<String, dynamic> params) {
+    return etecRestClient.getItemById(params);
+  }
 
   // SAP API request
-  Future<dynamic> sapApiRequest(String endPoint,
-      {required Map<String, dynamic> params}) async {
-    try {
-      final dio = await _getSapApi();
-      final response = await dio.get(endPoint, queryParameters: params);
-      return response.data;
-    } catch (error) {
-      print("Error in sapApiRequest: $error");
-      rethrow;
-    }
-  }
+  // Future<dynamic> sapApiRequest(String endPoint,
+  //     {required Map<String, dynamic> params}) async {
+  //   try {
+  //     final dio = await _getSapApi();
+  //     final response = await dio.get(endPoint, queryParameters: params);
+  //     return response.data;
+  //   } catch (error) {
+  //     print("Error in sapApiRequest: $error");
+  //     rethrow;
+  //   }
+  // }
 
   // Authentication login via POST
   Future<dynamic> postAuthLogin(Map<String, dynamic> params) async {
-    try {
-      final response =
-          await _wosolApi.post(Constants.LOGIN_AUTH_BIOMETRICS, data: params);
-      return response.data;
-    } catch (error) {
-      print("Error in postAuthLogin: $error");
-      rethrow;
-    }
+    return etecRestClient.postAuthLogin(params);
   }
 
   // Fetch Employee Data
   Future<dynamic> fetchEmployeeData(Map<String, dynamic> params) async {
-    return sapApiRequest(Constants.EMPLOYEE_SUMMARY, params: params);
+    return sapRestClient.fetchEmployeeData(params);
   }
 
   // Fetch Employee Attendance Records
   Future<dynamic> fetchEmployeeAttendanceRecords(
       Map<String, dynamic> params) async {
-    return sapApiRequest(Constants.EMPLOYEE_ATTENDANCE_RECORDS, params: params);
+    return sapRestClient.fetchEmployeeAttendanceRecords(params);
   }
 
   // Fetch Employee Leave Records
   Future<dynamic> fetchEmployeeLeavesRecord(Map<String, dynamic> params) async {
-    return sapApiRequest(Constants.EMPLOYEE_LEAVE_HISTORY, params: params);
+    return sapRestClient.fetchEmployeeLeavesRecord(params);
   }
 
   // Fetch Employee Excuse Hours Record
   Future<dynamic> fetchEmployeeExcuseHoursRecord(
       Map<String, dynamic> params) async {
-    return sapApiRequest(Constants.EMPLOYEE_EXCUSE_HISTORY, params: params);
+    return sapRestClient.fetchEmployeeExcuseHoursRecord(params);
   }
 
   // Fetch Employee Employment Data
   Future<dynamic> fetchEmployeeEmploymentData(
       Map<String, dynamic> params) async {
-    return sapApiRequest(Constants.EMPLOYEE_EMPLOYMENT, params: params);
+    return sapRestClient.fetchEmployeeEmploymentData(params);
   }
 
   // Fetch Employee Dependants Data
   Future<dynamic> fetchEmployeeDependantsData(
       Map<String, dynamic> params) async {
-    return sapApiRequest(Constants.EMPLOYEE_DEPENDANTS, params: params);
+    return sapRestClient.fetchEmployeeDependantsData(params);
   }
 
   // Fetch Employee Financial Data
   Future<dynamic> fetchEmployeeFinancialData(
       Map<String, dynamic> params) async {
-    return sapApiRequest(Constants.EMPLOYEE_FINANCIAL_INFORMATION,
-        params: params);
+    return sapRestClient.fetchEmployeeFinancialData(params);
+
   }
 
   // Fetch Salary Details
   Future<dynamic> fetchSalaryDetails(Map<String, dynamic> params) async {
-    return sapApiRequest(Constants.EMPLOYEE_COMPENSATIONS, params: params);
+    return sapRestClient.fetchSalaryDetails(params);
   }
 
   // Fetch SAP Token
   Future<dynamic> fetchSapToken(Map<String, dynamic> params) async {
-    try {
-      final response =
-          await _sapApi.post(Constants.END_POINT_TOKEN, data: params);
-      return response.data;
-    } catch (error) {
-      print("Error in fetchSapToken: $error");
-      rethrow;
-    }
+    return sapRestClient.fetchSapToken(params);
   }
 
   // Fetch Text Resources
-  Future<Map<String, dynamic>> fetchTextResources(
-    Map<String, dynamic> params,
-  ) async {
+  // Future<Map<String, dynamic>>
+  Future<List<ItemTutorial>>
+  fetchTextResources(Map<String, dynamic> params,) async {
     try {
       final defaultParams = {'listName': 'textResources'};
       final combinedParams = {...defaultParams, ...params};
       final response = await getListsItemsFiltered(combinedParams);
 
-      // Deserialize the response into a list of Items
-      final items = (response as List<dynamic>)
+      // // Deserialize the response into a list of Items
+      // final items = (response as List<dynamic>)
+      //     .map((item) => ItemTutorial.fromJson(item as Map<String, dynamic>))
+      //     .toList();
+      //
+      // return {
+      //   'data': items,
+      //   'isLoading': false,
+      //   'error': null,
+      //   // 'screen': screen,
+      // };
+
+      return (response as List<dynamic>)
           .map((item) => ItemTutorial.fromJson(item as Map<String, dynamic>))
           .toList();
 
-      return {
-        'data': items,
-        'isLoading': false,
-        'error': null,
-        // 'screen': screen,
-      };
 
-      return {
-        'data': response,
-        'isLoading': false,
-        'error': null,
-        // 'screen': screen,
-      };
     } catch (error) {
       print("Error in fetchTextResources: $error");
-      return {
-        'data': null,
-        'isLoading': false,
-        'error': error.toString(),
-        // 'screen': screen,
-      };
+      rethrow; // Let the StateNotifier handle the error
+      // return {
+      //   'data': null,
+      //   'isLoading': false,
+      //   'error': error.toString(),
+      //   // 'screen': screen,
+      // };
     }
   }
 
   // Fetch Intro Data
-  Future<Map<int, dynamic>> fetchIntroData(List<int> ids) async {
+  Future<Map<int, dynamic>>
+  // Future<Map<int,List<ItemTutorial>>>
+  fetchIntroData(List<int> ids) async {
     Map<int, dynamic> introData = {};
     try {
       for (int id in ids) {

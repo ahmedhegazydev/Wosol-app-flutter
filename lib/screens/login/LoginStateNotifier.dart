@@ -29,10 +29,10 @@ class LoginStateNotifier extends StateNotifier<LoginState> {
         },
       );
 
-      state = state.copyWith(
-        textResources: fetchedTextResources,
-        isLoading: false,
-      );
+      // state = state.copyWith(
+      //   textResources: fetchedTextResources,
+      //   isLoading: false,
+      // );
     } catch (error) {
       print("Error fetching data: $error");
       state = state.copyWith(isLoading: false);

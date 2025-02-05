@@ -24,4 +24,10 @@ abstract class EtecRestClient {
   @GET(Constants.GET_ITEM_BY_ID)
   Future<Map<String, dynamic>> getItemById(
       @Queries() Map<String, dynamic> params);
+
+
+  @POST(Constants.LOGIN_AUTH_BIOMETRICS)
+  Future<Map<String, dynamic>> postAuthLogin(@Body() Map<String, dynamic> body);
+
+
 }
