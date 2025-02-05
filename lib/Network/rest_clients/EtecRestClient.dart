@@ -14,13 +14,14 @@ abstract class EtecRestClient {
   }) = _EtecRestClient;
 
   @GET(Constants.GET_LISTS_ITEMS_FILTERED)
-  Future<List<dynamic>> getListsItemsFiltered(
+  Future<Map<String, dynamic>> getListsItemsFiltered(
       @Queries() Map<String, dynamic> params);
 
-// @GET(Constants.GET_LISTS_ITEMS)
-// Future<List<dynamic>> getListsItems(@Queries() Map<String, dynamic> params);
-//
-// @GET(Constants.GET_ITEM_BY_ID)
-// Future<Map<String, dynamic>> getItemById(
-//     @Queries() Map<String, dynamic> params);
+  @GET(Constants.GET_LISTS_ITEMS)
+  Future<Map<String, dynamic>> getListsItems(
+      @Queries() Map<String, dynamic> params);
+
+  @GET(Constants.GET_ITEM_BY_ID)
+  Future<Map<String, dynamic>> getItemById(
+      @Queries() Map<String, dynamic> params);
 }

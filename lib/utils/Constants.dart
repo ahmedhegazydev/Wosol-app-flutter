@@ -5,13 +5,12 @@ class Constants {
   // Base URLs
   static const String BASE_URL_SAP =
       'https://integrationapistg.etec.gov.sa/sap.api';
-  static const String BASE_URL_ETEC = 'https://beta.etec.gov.sa:1443';
+  static const String BASE_URL_ETEC = 'https://beta.etec.gov.sa:1443/api';
 
   // Endpoints
-  static const String GET_LISTS_ITEMS_FILTERED =
-      '/api/List/GetListsItemsFilterd';
-  static const String GET_LISTS_ITEMS = '/api/List/GetListsItems';
-  static const String GET_ITEM_BY_ID = '/api/List/GetItemById';
+  static const String GET_LISTS_ITEMS_FILTERED = '/List/GetListsItemsFilterd';
+  static const String GET_LISTS_ITEMS = '/List/GetListsItems';
+  static const String GET_ITEM_BY_ID = '/List/GetItemById';
 
   static const String EMPLOYEE_SUMMARY = '/EmployeeSummary';
   static const String EMPLOYEE_ATTENDANCE_RECORDS =
@@ -25,7 +24,7 @@ class Constants {
       '/employeeFinancialInformation';
   static const String EMPLOYEE_COMPENSATIONS = '/employeeCompensations';
 
-  static const String LOGIN_AUTH_BIOMETRICS = '/api/Login/Authenticate';
+  static const String LOGIN_AUTH_BIOMETRICS = '/Login/Authenticate';
   static const String END_POINT_TOKEN = '/TokenAuth';
 
   // List Media Files
