@@ -1,8 +1,11 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:dio_smart_retry/dio_smart_retry.dart';
 import 'package:flutter_apps/Network/data/tutorial/ItemTutorial.dart';
 import 'package:flutter_apps/utils/Constants.dart';
 import 'package:flutter_apps/utils/PrefManager.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'Network/rest_clients/EtecRestClient.dart';
 import 'Network/rest_clients/SapRestClient.dart';
@@ -134,7 +137,10 @@ class NetworkManager {
     return _sapApi;
   }
 
-  Future<Map<String, dynamic>> getListsItemsFiltered(Map<String, dynamic> params) {
+  // Future<Map<String, dynamic>> getListsItemsFiltered(
+  // Future<List<dynamic>> getListsItemsFiltered(
+  Future<List<ItemTutorial>> getListsItemsFiltered(
+      Map<String, dynamic> params) {
     return etecRestClient.getListsItemsFiltered(params);
   }
 
@@ -202,7 +208,6 @@ class NetworkManager {
   Future<dynamic> fetchEmployeeFinancialData(
       Map<String, dynamic> params) async {
     return sapRestClient.fetchEmployeeFinancialData(params);
-
   }
 
   // Fetch Salary Details
@@ -215,48 +220,25 @@ class NetworkManager {
     return sapRestClient.fetchSapToken(params);
   }
 
-  // Fetch Text Resources
-  // Future<Map<String, dynamic>>
-  Future<List<ItemTutorial>>
-  fetchTextResources(Map<String, dynamic> params,) async {
+  Future<List<ItemTutorial>> fetchTextResources(
+    Map<String, dynamic> params,
+  ) async {
     try {
       final defaultParams = {'listName': 'textResources'};
       final combinedParams = {...defaultParams, ...params};
       final response = await getListsItemsFiltered(combinedParams);
-
-      // // Deserialize the response into a list of Items
-      // final items = (response as List<dynamic>)
-      //     .map((item) => ItemTutorial.fromJson(item as Map<String, dynamic>))
-      //     .toList();
-      //
-      // return {
-      //   'data': items,
-      //   'isLoading': false,
-      //   'error': null,
-      //   // 'screen': screen,
-      // };
-
-      return (response as List<dynamic>)
-          .map((item) => ItemTutorial.fromJson(item as Map<String, dynamic>))
-          .toList();
-
-
+      return response;
     } catch (error) {
       print("Error in fetchTextResources: $error");
-      rethrow; // Let the StateNotifier handle the error
-      // return {
-      //   'data': null,
-      //   'isLoading': false,
-      //   'error': error.toString(),
-      //   // 'screen': screen,
-      // };
+      rethrow;
     }
   }
 
+
   // Fetch Intro Data
   Future<Map<int, dynamic>>
-  // Future<Map<int,List<ItemTutorial>>>
-  fetchIntroData(List<int> ids) async {
+      // Future<Map<int,List<ItemTutorial>>>
+      fetchIntroData(List<int> ids) async {
     Map<int, dynamic> introData = {};
     try {
       for (int id in ids) {
@@ -281,3 +263,4 @@ class NetworkManager {
     return introData;
   }
 }
+
