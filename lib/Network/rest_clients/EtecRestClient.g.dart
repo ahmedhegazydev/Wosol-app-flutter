@@ -20,7 +20,7 @@ class _EtecRestClient implements EtecRestClient {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<Map<String, dynamic>> getListsItemsFiltered(
+  Future<List<ItemTutorial>> getListsItemsFiltered(
     Map<String, dynamic> params,
   ) async {
     final _extra = <String, dynamic>{};
@@ -28,7 +28,7 @@ class _EtecRestClient implements EtecRestClient {
     queryParameters.addAll(params);
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<Map<String, dynamic>>(
+    final _options = _setStreamType<List<ItemTutorial>>(
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
@@ -38,13 +38,14 @@ class _EtecRestClient implements EtecRestClient {
           )
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
-    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late Map<String, dynamic> _value;
+    final _result = await _dio.fetch<List<dynamic>>(_options);
+    late List<ItemTutorial> _value;
     try {
-      _value = _result.data!.map(
-        (k, dynamic v) =>
-            MapEntry(k, v.fromJson(v as Map<String, dynamic>)),
-      );
+      _value = _result.data!
+          .map(
+            (dynamic i) => ItemTutorial.fromJson(i as Map<String, dynamic>),
+          )
+          .toList();
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;

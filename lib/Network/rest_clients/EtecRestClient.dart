@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 
 import '../../utils/Constants.dart';
+import '../data/tutorial/ItemTutorial.dart';
 
 part 'EtecRestClient.g.dart';
 
@@ -14,7 +15,8 @@ abstract class EtecRestClient {
   }) = _EtecRestClient;
 
   @GET(Constants.GET_LISTS_ITEMS_FILTERED)
-  Future<Map<String, dynamic>> getListsItemsFiltered(
+  // Future<Map<String, dynamic>> getListsItemsFiltered(
+  Future<List<ItemTutorial>> getListsItemsFiltered(
       @Queries() Map<String, dynamic> params);
 
   @GET(Constants.GET_LISTS_ITEMS)
