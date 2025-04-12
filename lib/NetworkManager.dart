@@ -7,6 +7,7 @@ import 'package:flutter_apps/utils/Constants.dart';
 import 'package:flutter_apps/utils/PrefManager.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'Network/data/tutorial/IntroItem.dart';
 import 'Network/rest_clients/EtecRestClient.dart';
 import 'Network/rest_clients/SapRestClient.dart';
 
@@ -148,7 +149,7 @@ class NetworkManager {
     return etecRestClient.getListsItems(params);
   }
 
-  Future<Map<String, dynamic>> getItemById(Map<String, dynamic> params) {
+  Future<T> getItemById<T>(Map<String, dynamic> params) {
     return etecRestClient.getItemById(params);
   }
 
@@ -236,13 +237,11 @@ class NetworkManager {
 
 
   // Fetch Intro Data
-  Future<Map<int, dynamic>>
-      // Future<Map<int,List<ItemTutorial>>>
-      fetchIntroData(List<int> ids) async {
+  Future<Map<int, dynamic>> fetchIntroData(List<int> ids) async {
     Map<int, dynamic> introData = {};
     try {
       for (int id in ids) {
-        final response = await getItemById({
+        final response = await getItemById<IntroItem>({
           'listName': 'Intro',
           'id': id,
           'lang': 'ar',

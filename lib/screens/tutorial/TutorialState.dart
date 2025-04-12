@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../Network/data/tutorial/IntroItem.dart';
 import '../../Network/data/tutorial/ItemTutorial.dart';
 
 class TutorialState {
@@ -9,6 +10,7 @@ class TutorialState {
   final List<ItemTutorial>? textResources;
 
 
+  // final IntroItem? introData;
   final Map<int, dynamic>? introData;
   // final List<ItemTutorial>? introData;
 
@@ -28,6 +30,7 @@ class TutorialState {
     // Map<String, dynamic>? textResources,
     List<ItemTutorial>? textResources,
 
+    // IntroItem? introData,
     Map<int, dynamic>? introData,
     // List<ItemTutorial>? introData,
 

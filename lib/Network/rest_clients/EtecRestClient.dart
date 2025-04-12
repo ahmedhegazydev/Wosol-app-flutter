@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 
 import '../../utils/Constants.dart';
+import '../data/tutorial/IntroItem.dart';
 import '../data/tutorial/ItemTutorial.dart';
 
 part 'EtecRestClient.g.dart';
@@ -23,8 +24,13 @@ abstract class EtecRestClient {
   Future<Map<String, dynamic>> getListsItems(
       @Queries() Map<String, dynamic> params);
 
+  // @GET(Constants.GET_ITEM_BY_ID)
+  // // Future<Map<String, dynamic>> getItemById(
+  // Future<IntroItem> getItemById(
+  //     @Queries() Map<String, dynamic> params);
+
   @GET(Constants.GET_ITEM_BY_ID)
-  Future<Map<String, dynamic>> getItemById(
+  Future<T> getItemById<T>(
       @Queries() Map<String, dynamic> params);
 
 

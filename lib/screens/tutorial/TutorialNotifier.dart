@@ -1,6 +1,7 @@
 import 'package:flutter_apps/NetworkManager.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../Network/data/tutorial/IntroItem.dart';
 import 'TutorialState.dart';
 
 class TutorialNotifier extends StateNotifier<TutorialState> {
@@ -49,3 +50,5 @@ class TutorialNotifier extends StateNotifier<TutorialState> {
 final tutorialProvider = StateNotifierProvider<TutorialNotifier, TutorialState>(
   (ref) => TutorialNotifier(),
 );
+
+

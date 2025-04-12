@@ -64,6 +64,7 @@ class TutorialScreen extends ConsumerWidget {
                 controller: tutorialState.pageController,
                 onPageChanged: tutorialNotifier.updateCurrentIndex,
                 itemCount: tutorialState.introData?.length ?? 0,
+                // itemCount: 3,
                 itemBuilder: (context, index) {
                   final data = tutorialState.introData?[index + 1]?['data'];
                   if (data == null) {
@@ -85,7 +86,8 @@ class TutorialScreen extends ConsumerWidget {
               ),
             ),
             PaginationDots(
-              length: tutorialState.introData?.length ?? 3,
+              // length: tutorialState.introData?.length ?? 3,
+              length:  3,
               currentIndex: tutorialState.currentIndex,
             ),
             Padding(
@@ -97,7 +99,8 @@ class TutorialScreen extends ConsumerWidget {
                     : 'Next',
                 onPress: () {
                   if (tutorialState.currentIndex <
-                      (tutorialState.introData?.length ?? 3) - 1) {
+                      // (tutorialState.introData?.length ?? 3) - 1) {
+                      3 - 1) {
                     tutorialState.pageController.nextPage(
                       duration: Duration(milliseconds: 300),
                       curve: Curves.easeInOut,
