@@ -6,13 +6,8 @@ import '../../Network/data/tutorial/ItemTutorial.dart';
 class TutorialState {
   final bool isLoading;
 
-  // final Map<String, dynamic>? textResources;
   final List<ItemTutorial>? textResources;
-
-
-  // final IntroItem? introData;
   final Map<int, dynamic>? introData;
-  // final List<ItemTutorial>? introData;
 
   final int currentIndex;
   final PageController pageController;

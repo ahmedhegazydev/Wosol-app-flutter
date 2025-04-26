@@ -21,46 +21,62 @@ class IntroItem {
 @JsonSerializable()
 class ItemFields {
   @JsonKey(name: 'Title')
-  final String title;
+  final String? title;
 
   @JsonKey(name: 'IntroTitle')
-  final String introTitle;
+  final String? introTitle;
 
   @JsonKey(name: 'IntroDetails')
-  final String introDetails;
+  final String? introDetails;
 
   @JsonKey(name: 'IntroIcon')
-  final IntroIcon introIcon;
+  final IntroIcon? introIcon;
 
   @JsonKey(name: 'IsActive')
-  final bool isActive;
+  final bool? isActive;
 
   @JsonKey(name: 'ID')
   final int id;
 
   @JsonKey(name: 'Modified')
-  final String modified;
+  final String? modified;
 
   @JsonKey(name: 'Created')
-  final String created;
+  final String? created;
 
   @JsonKey(name: 'Order')
-  final double order;
+  final double? order;
 
   @JsonKey(name: 'GUID')
-  final String guid;
+  final String? guid;
+
+  @JsonKey(name: 'TextKey')
+  final String? textKey;
+
+  @JsonKey(name: 'TextValue')
+  final String? textValue;
+
+  @JsonKey(name: 'Language')
+  final String? language;
+
+  @JsonKey(name: 'ScreenName')
+  final List<String>? screenName;
 
   ItemFields({
-    required this.title,
-    required this.introTitle,
-    required this.introDetails,
-    required this.introIcon,
-    required this.isActive,
+    this.title,
+    this.introTitle,
+    this.introDetails,
+    this.introIcon,
+    this.isActive,
     required this.id,
-    required this.modified,
-    required this.created,
-    required this.order,
-    required this.guid,
+    this.modified,
+    this.created,
+    this.order,
+    this.guid,
+    this.textValue,
+    this.textKey,
+    this.language,
+    this.screenName,
   });
 
   factory ItemFields.fromJson(Map<String, dynamic> json) =>
@@ -72,18 +88,18 @@ class ItemFields {
 @JsonSerializable()
 class IntroIcon {
   @JsonKey(name: 'Description')
-  final String description;
+  final String? description;
 
   @JsonKey(name: 'Url')
-  final String url;
+  final String? url;
 
   @JsonKey(name: 'TypeId')
-  final String typeId;
+  final String? typeId;
 
   IntroIcon({
-    required this.description,
-    required this.url,
-    required this.typeId,
+    this.description,
+    this.url,
+    this.typeId,
   });
 
   factory IntroIcon.fromJson(Map<String, dynamic> json) =>

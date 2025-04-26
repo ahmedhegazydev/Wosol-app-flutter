@@ -138,8 +138,6 @@ class NetworkManager {
     return _sapApi;
   }
 
-  // Future<Map<String, dynamic>> getListsItemsFiltered(
-  // Future<List<dynamic>> getListsItemsFiltered(
   Future<List<ItemTutorial>> getListsItemsFiltered(
       Map<String, dynamic> params) {
     return etecRestClient.getListsItemsFiltered(params);
@@ -149,22 +147,9 @@ class NetworkManager {
     return etecRestClient.getListsItems(params);
   }
 
-  Future<T> getItemById<T>(Map<String, dynamic> params) {
+  Future<IntroItem> getItemById(Map<String, dynamic> params) {
     return etecRestClient.getItemById(params);
   }
-
-  // SAP API request
-  // Future<dynamic> sapApiRequest(String endPoint,
-  //     {required Map<String, dynamic> params}) async {
-  //   try {
-  //     final dio = await _getSapApi();
-  //     final response = await dio.get(endPoint, queryParameters: params);
-  //     return response.data;
-  //   } catch (error) {
-  //     print("Error in sapApiRequest: $error");
-  //     rethrow;
-  //   }
-  // }
 
   // Authentication login via POST
   Future<dynamic> postAuthLogin(Map<String, dynamic> params) async {
@@ -238,16 +223,23 @@ class NetworkManager {
 
   // Fetch Intro Data
   Future<Map<int, dynamic>> fetchIntroData(List<int> ids) async {
+  // Future<IntroItem> fetchIntroData(List<int> ids) async {
     Map<int, dynamic> introData = {};
     try {
       for (int id in ids) {
-        final response = await getItemById<IntroItem>({
+        final response = await getItemById({
           'listName': 'Intro',
           'id': id,
           'lang': 'ar',
           'SiteName': 'internalportal',
         });
-        introData[id] = {'data': response, 'isLoading': false, 'error': null};
+        // final item = IntroItem.fromJson(response as Map<String, dynamic>);
+
+        introData[id] = {
+          'data': response,
+          'isLoading': false,
+          'error': null,
+        };
       }
     } catch (error) {
       for (int id in ids) {

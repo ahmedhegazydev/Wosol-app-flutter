@@ -21,46 +21,46 @@ class ItemTutorial {
 @JsonSerializable()
 class ItemFields {
   @JsonKey(name: 'Title')
-  final String title;
+  final String? title;
 
   @JsonKey(name: 'TextKey')
-  final String textKey;
+  final String? textKey;
 
   @JsonKey(name: 'TextValue')
-  final String textValue;
+  final String? textValue;
 
   @JsonKey(name: 'Language')
-  final String language;
+  final String? language;
 
   @JsonKey(name: 'ScreenName')
-  final List<String> screenName;
+  final List<String>? screenName;
 
   @JsonKey(name: 'ID')
   final int id;
 
   @JsonKey(name: 'Modified')
-  final String modified;
+  final String? modified;
 
   @JsonKey(name: 'Created')
-  final String created;
+  final String? created;
 
   @JsonKey(name: 'Order')
-  final double order;
+  final double? order;
 
   @JsonKey(name: 'GUID')
-  final String guid;
+  final String? guid;
 
   ItemFields({
-    required this.title,
-    required this.textKey,
-    required this.textValue,
-    required this.language,
-    required this.screenName,
+    this.title,
+    this.textKey,
+    this.textValue,
+    this.language,
+    this.screenName,
     required this.id,
-    required this.modified,
-    required this.created,
-    required this.order,
-    required this.guid,
+    this.modified,
+    this.created,
+    this.order,
+    this.guid,
   });
 
   factory ItemFields.fromJson(Map<String, dynamic> json) =>

@@ -18,16 +18,24 @@ Map<String, dynamic> _$IntroItemToJson(IntroItem instance) => <String, dynamic>{
     };
 
 ItemFields _$ItemFieldsFromJson(Map<String, dynamic> json) => ItemFields(
-      title: json['Title'] as String,
-      introTitle: json['IntroTitle'] as String,
-      introDetails: json['IntroDetails'] as String,
-      introIcon: IntroIcon.fromJson(json['IntroIcon'] as Map<String, dynamic>),
-      isActive: json['IsActive'] as bool,
+      title: json['Title'] as String?,
+      introTitle: json['IntroTitle'] as String?,
+      introDetails: json['IntroDetails'] as String?,
+      introIcon: json['IntroIcon'] == null
+          ? null
+          : IntroIcon.fromJson(json['IntroIcon'] as Map<String, dynamic>),
+      isActive: json['IsActive'] as bool?,
       id: (json['ID'] as num).toInt(),
-      modified: json['Modified'] as String,
-      created: json['Created'] as String,
-      order: (json['Order'] as num).toDouble(),
-      guid: json['GUID'] as String,
+      modified: json['Modified'] as String?,
+      created: json['Created'] as String?,
+      order: (json['Order'] as num?)?.toDouble(),
+      guid: json['GUID'] as String?,
+      textValue: json['TextValue'] as String?,
+      textKey: json['TextKey'] as String?,
+      language: json['Language'] as String?,
+      screenName: (json['ScreenName'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
     );
 
 Map<String, dynamic> _$ItemFieldsToJson(ItemFields instance) =>
@@ -42,12 +50,16 @@ Map<String, dynamic> _$ItemFieldsToJson(ItemFields instance) =>
       'Created': instance.created,
       'Order': instance.order,
       'GUID': instance.guid,
+      'TextKey': instance.textKey,
+      'TextValue': instance.textValue,
+      'Language': instance.language,
+      'ScreenName': instance.screenName,
     };
 
 IntroIcon _$IntroIconFromJson(Map<String, dynamic> json) => IntroIcon(
-      description: json['Description'] as String,
-      url: json['Url'] as String,
-      typeId: json['TypeId'] as String,
+      description: json['Description'] as String?,
+      url: json['Url'] as String?,
+      typeId: json['TypeId'] as String?,
     );
 
 Map<String, dynamic> _$IntroIconToJson(IntroIcon instance) => <String, dynamic>{
